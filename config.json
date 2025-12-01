@@ -11,7 +11,8 @@
     "hero": { "show": true },
     "qrCode": { "show": true },
     "contact": { "show": true },
-    "footer": { "show": true }
+    "footer": { "show": true },
+    "guidedAssistant": { "show": true }
   },
   "content": {
     "hero": {
@@ -30,6 +31,38 @@
       "emailLabel": "البريد الإلكتروني",
       "emailPlaceholder": "أدخل بريدك الإلكتروني",
       "submitButton": "إرسال الرسالة"
+    }
+  },
+  "guidedAssistant": {
+    "chatTitle": "المساعد الموجه",
+    "buttonLabel": "افتح المساعد الموجه",
+    "logoUrl": "https://raw.githubusercontent.com/Tameem-Al-Zahrani/Images/main/1-removebg-preview.png",
+    "root": {
+      "message": "أهلاً بك! كيف يمكنني مساعدتك اليوم؟",
+      "options": [
+        { "text": "ما هي خدماتكم؟", "nextId": "servicesNode" },
+        { "text": "ما هي الأسعار؟", "nextId": "pricingNode" },
+        { "text": "كيف أتواصل معكم؟", "nextId": "contactNode" }
+      ]
+    },
+    "servicesNode": {
+      "message": "نحن نقدم باقة متكاملة تشمل صفحة هبوط احترافية، مساعد موجه للرد على العملاء، وتطبيق ويب خفيف (PWA) لإرسال الإشعارات.",
+      "options": [
+        { "text": "أخبرني عن الأسعار", "nextId": "pricingNode" },
+        { "text": "العودة للبداية", "nextId": "root" }
+      ]
+    },
+    "pricingNode": {
+      "message": "تبدأ باقتنا من 99 ر.س شهرياً. يمكنك الاطلاع على كل التفاصيل في قسم الأسعار في الصفحة.",
+      "options": [
+        { "text": "العودة للبداية", "nextId": "root" }
+      ]
+    },
+    "contactNode": {
+      "message": "يمكنك التواصل معنا عبر تعبئة النموذج في قسم 'هل لديك سؤال؟' وسنقوم بالرد عليك في أقرب وقت.",
+      "options": [
+        { "text": "العودة للبداية", "nextId": "root" }
+      ]
     }
   }
 }
