@@ -10,12 +10,13 @@ import { Label } from "@/components/ui/label"
 
 // 1. استيراد لوحة التحكم
 import config from "../config.json"
+// 2. استيراد المكون الجديد
+import { SmartAmbassadorGuided } from "@/components/ui/SmartAmbassadorGuided"
 
 // =================================================================
-// المرحلة 2: بناء مكونات الأقسام المستقلة (مع تعريف الأنواع)
+// مكونات الأقسام المستقلة (تبقى كما هي)
 // =================================================================
 
-// مكون الهيدر (الشريط العلوي)
 const Header = ({ data }: { data: any }) => (
   <header className="sticky top-0 z-50 bg-background border-b">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -28,7 +29,6 @@ const Header = ({ data }: { data: any }) => (
   </header>
 )
 
-// مكون قسم الهيرو (القسم الرئيسي)
 const HeroSection = ({ data }: { data: any }) => (
   <section className="w-full bg-gray-900 dark:bg-gray-800 py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -41,7 +41,6 @@ const HeroSection = ({ data }: { data: any }) => (
   </section>
 )
 
-// مكون قسم رمز الاستجابة السريعة
 const QrCodeSection = ({ data }: { data: any }) => (
   <section className="w-full py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,7 +59,6 @@ const QrCodeSection = ({ data }: { data: any }) => (
   </section>
 )
 
-// مكون قسم التواصل
 const ContactSection = ({ data }: { data: any }) => {
   const [formData, setFormData] = useState({ name: "", email: "" })
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,7 +99,6 @@ const ContactSection = ({ data }: { data: any }) => {
   )
 }
 
-// مكون التذييل (الفوتر)
 const Footer = ({ data }: { data: any }) => (
   <footer className="w-full bg-gray-900 py-6">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -115,7 +112,7 @@ const Footer = ({ data }: { data: any }) => (
 )
 
 // =================================================================
-// المرحلة 3: بناء المحرك الديناميكي الذي يجمع كل شيء
+// المحرك الديناميكي الذي يجمع كل شيء
 // =================================================================
 
 export default function LandingPage() {
@@ -126,6 +123,9 @@ export default function LandingPage() {
       {config.sections.qrCode.show && <QrCodeSection data={config.content.qrCode} />}
       {config.sections.contact.show && <ContactSection data={config.content.contact} />}
       {config.sections.footer.show && <Footer data={config.site} />}
+      
+      {/* 3. استدعاء المكون الجديد وتمرير الإعدادات له */}
+      {config.sections.guidedAssistant.show && <SmartAmbassadorGuided config={config.guidedAssistant} />}
     </main>
   )
 }
