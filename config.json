@@ -11,7 +11,7 @@
     "hero": { "show": true },
     "qrCode": { "show": true },
     "contact": { "show": true },
-    "footer": { "show": false }
+    "footer": { "show": true }
   },
   "content": {
     "hero": {
