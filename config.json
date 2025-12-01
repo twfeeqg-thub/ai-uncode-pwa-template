@@ -6,6 +6,13 @@
     "privacyPolicyLink": "/privacy",
     "termsOfServiceLink": "/terms"
   },
+  "pwa": {
+    "appName": "تطبيق أيكود",
+    "appShortName": "أيكود",
+    "appDescription": "تطبيقنا الرسمي للحصول على آخر العروض والإشعارات.",
+    "themeColor": "#0A0A0A",
+    "backgroundColor": "#FFFFFF"
+  },
   "sections": {
     "header": { "show": true },
     "hero": { "show": true },
@@ -21,7 +28,7 @@
       "ctaButton": "احصل على الحزمة الآن"
     },
     "qrCode": {
-      "title": "تثبيت تطبيقنا الويب التقدمي",
+      "title": "ثبّت تطبيقنا الويب التقدمي",
       "description": "امسح الكود برمز الاستجابة السريعة من خلال كاميرا هاتفك لتثبيت تطبيقنا الخفيف. احصل على إشعارات فورية، وأدِر الحجوزات، والوصول إلى العروض الحصرية مباشرة من شاشتك الرئيسية. لا حاجة لمتجر التطبيقات."
     },
     "contact": {
