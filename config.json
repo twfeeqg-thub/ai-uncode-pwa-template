@@ -1,0 +1,35 @@
+{
+  "site": {
+    "name": "أيكود",
+    "contactButton": "تواصل معنا",
+    "copyright": "© 2025 أيكود. جميع الحقوق محفوظة.",
+    "privacyPolicyLink": "/privacy",
+    "termsOfServiceLink": "/terms"
+  },
+  "sections": {
+    "header": { "show": true },
+    "hero": { "show": true },
+    "qrCode": { "show": true },
+    "contact": { "show": true },
+    "footer": { "show": true }
+  },
+  "content": {
+    "hero": {
+      "title": "حوّل عملك مع حزمتنا الرقمية المتكاملة",
+      "subtitle": "من موقع ويب مذهل إلى مساعد ذكي، احصل على كل ما تحتاجه للانتقال إلى العالم الرقمي بسرعة.",
+      "ctaButton": "احصل على الحزمة الآن"
+    },
+    "qrCode": {
+      "title": "تثبيت تطبيقنا الويب التقدمي",
+      "description": "امسح الكود برمز الاستجابة السريعة من خلال كاميرا هاتفك لتثبيت تطبيقنا الخفيف. احصل على إشعارات فورية، وأدِر الحجوزات، والوصول إلى العروض الحصرية مباشرة من شاشتك الرئيسية. لا حاجة لمتجر التطبيقات."
+    },
+    "contact": {
+      "title": "هل لديك سؤال؟",
+      "nameLabel": "الاسم",
+      "namePlaceholder": "أدخل اسمك",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "submitButton": "إرسال الرسالة"
+    }
+  }
+}
