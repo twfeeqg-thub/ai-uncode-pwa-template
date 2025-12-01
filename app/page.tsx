@@ -12,11 +12,11 @@ import { Label } from "@/components/ui/label"
 import config from "../config.json"
 
 // =================================================================
-// المرحلة 2: بناء مكونات الأقسام المستقلة (مكعبات الليغو)
+// المرحلة 2: بناء مكونات الأقسام المستقلة (مع تعريف الأنواع)
 // =================================================================
 
 // مكون الهيدر (الشريط العلوي)
-const Header = ({ data }) => (
+const Header = ({ data }: { data: any }) => (
   <header className="sticky top-0 z-50 bg-background border-b">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
       <div className="flex items-center gap-2">
@@ -29,7 +29,7 @@ const Header = ({ data }) => (
 )
 
 // مكون قسم الهيرو (القسم الرئيسي)
-const HeroSection = ({ data }) => (
+const HeroSection = ({ data }: { data: any }) => (
   <section className="w-full bg-gray-900 dark:bg-gray-800 py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 className="text-5xl font-bold tracking-tighter text-white mb-6">{data.title}</h1>
@@ -42,7 +42,7 @@ const HeroSection = ({ data }) => (
 )
 
 // مكون قسم رمز الاستجابة السريعة
-const QrCodeSection = ({ data }) => (
+const QrCodeSection = ({ data }: { data: any }) => (
   <section className="w-full py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -61,7 +61,7 @@ const QrCodeSection = ({ data }) => (
 )
 
 // مكون قسم التواصل
-const ContactSection = ({ data }) => {
+const ContactSection = ({ data }: { data: any }) => {
   const [formData, setFormData] = useState({ name: "", email: "" })
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -70,7 +70,6 @@ const ContactSection = ({ data }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Form submitted:", formData)
-    // هنا سنضيف لاحقاً الكود لربط النموذج مع Supabase
     setFormData({ name: "", email: "" })
   }
 
@@ -103,13 +102,13 @@ const ContactSection = ({ data }) => {
 }
 
 // مكون التذييل (الفوتر)
-const Footer = ({ data }) => (
+const Footer = ({ data }: { data: any }) => (
   <footer className="w-full bg-gray-900 py-6">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p className="text-gray-400">{data.copyright}</p>
       <nav className="flex gap-4">
-        <Button variant="link" className="text-white hover:text-gray-200">{config.site.privacyPolicyLink.replace("/", "سياسة الخصوصية")}</Button>
-        <Button variant="link" className="text-white hover:text-gray-200">{config.site.termsOfServiceLink.replace("/", "شروط الخدمة")}</Button>
+        <Button variant="link" className="text-white hover:text-gray-200">سياسة الخصوصية</Button>
+        <Button variant="link" className="text-white hover:text-gray-200">شروط الخدمة</Button>
       </nav>
     </div>
   </footer>
