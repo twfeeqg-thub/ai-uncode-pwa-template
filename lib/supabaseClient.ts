@@ -1,7 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 
-// تم وضع القيم بين علامتي تنصيص لتصحيح الخطأ
-const supabaseUrl = "https://yjelvixvgnkadjwfmsuj.supabase.co"
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlqZWx2aXh2Z25rYWRqd2Ztc3VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ1NzcyMjEsImV4cCI6MjA4MDE1MzIyMX0.UQu1YqHD-FiJlZuhc8XyPX_CQ6-1XRftY6hb6smIqp4"
+// قراءة المتغيرات من بيئة العمل (Vercel)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey )
+// التحقق من وجود المتغيرات لضمان عدم حدوث أخطاء
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Supabase URL and Anon Key are not defined in environment variables.");
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
