@@ -1,23 +1,29 @@
 "use client"
 
+// --- بداية التعديلات ---
+// 1. استيراد الأيقونات والمكونات الجديدة المطلوبة للنموذج الشامل
 import type React from "react"
-import { useState, useRef, useEffect } from "react" // 1. إضافة useRef و useEffect
-import { MountainIcon, Download, Copy, Share2 } from "lucide-react" // 2. استبدال أيقونة QR بأيقونات الأزرار
+import { useState, useRef, useEffect } from "react"
+import { MountainIcon, Download, Copy, Share2, Phone, Mail, MessageSquare, Calendar, Paperclip } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { QRCodeCanvas } from "qrcode.react" // 3. استيراد مكتبة QR Code
+import { QRCodeCanvas } from "qrcode.react"
+import { Textarea } from "@/components/ui/textarea" // حقل الرسالة
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select" // القائمة المنسدلة
+import { Checkbox } from "@/components/ui/checkbox" // مربع الموافقة
+import Link from "next/link" // للروابط
+// --- نهاية التعديلات ---
 
 // استيراد لوحة التحكم والمساعد الموجه
 import config from "../config.json"
 import { SmartAmbassadorGuided } from "@/components/ui/SmartAmbassadorGuided"
 
 // =================================================================
-// مكونات الأقسام المستقلة
+// مكونات الأقسام المستقلة (Header, Hero, Footer تبقى كما هي)
 // =================================================================
 
-// مكون الهيدر (يبقى كما هو)
 const Header = ({ data }: { data: any }) => (
   <header className="sticky top-0 z-50 bg-background border-b">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -30,7 +36,6 @@ const Header = ({ data }: { data: any }) => (
   </header>
 )
 
-// مكون قسم الهيرو (يبقى كما هو)
 const HeroSection = ({ data }: { data: any }) => (
   <section className="w-full bg-gray-900 dark:bg-gray-800 py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -43,13 +48,12 @@ const HeroSection = ({ data }: { data: any }) => (
   </section>
 )
 
-// --- بداية التعديل الجذري على مكون QR Code ---
+// مكون QR Code (يبقى كما هو)
 const QrCodeSection = ({ data }: { data: any }) => {
   const [pageUrl, setPageUrl] = useState("");
   const qrRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // التأكد من أن الكود يعمل فقط في المتصفح
     if (typeof window !== "undefined") {
       setPageUrl(window.location.href);
     }
@@ -137,21 +141,40 @@ const QrCodeSection = ({ data }: { data: any }) => {
     </section>
   );
 };
-// --- نهاية التعديل الجذري ---
 
-
-// مكون قسم التواصل (يبقى كما هو)
+// --- بداية إعادة كتابة مكون ContactSection بالكامل ---
 const ContactSection = ({ data }: { data: any }) => {
-  const [formData, setFormData] = useState({ name: "", email: "" })
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  // حالة لتخزين بيانات النموذج بالكامل
+  const [formData, setFormData] = useState<{ [key: string]: any }>({});
+  // حالة لتتبع الموافقة على الخصوصية
+  const [consent, setConsent] = useState(false);
+
+  // دالة عامة لتحديث بيانات النموذج
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // دالة خاصة لتحديث القائمة المنسدلة
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // دالة الإرسال
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    setFormData({ name: "", email: "" })
-  }
+    e.preventDefault();
+    if (!consent) {
+      alert("يجب الموافقة على سياسة الخصوصية أولاً.");
+      return;
+    }
+    // هنا سنضيف لاحقاً الكود لإرسال البيانات إلى Supabase
+    console.log("البيانات التي سيتم إرسالها:", {
+      form_data: formData,
+      consent_given: consent,
+      consent_timestamp: new Date().toISOString(),
+    });
+    alert("تم إرسال النموذج بنجاح (محاكاة).");
+  };
 
   return (
     <section className="w-full bg-gray-50 dark:bg-gray-900 py-16">
@@ -161,41 +184,110 @@ const ContactSection = ({ data }: { data: any }) => {
             <CardTitle className="text-2xl">{data.title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="grid gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">{data.nameLabel}</Label>
-                <Input id="name" name="name" placeholder={data.namePlaceholder} value={formData.name} onChange={handleInputChange} required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">{data.emailLabel}</Label>
-                <Input id="email" name="email" type="email" placeholder={data.emailPlaceholder} value={formData.email} onChange={handleInputChange} required />
+            <form onSubmit={handleSubmit} className="grid gap-6">
+              {/* عرض حقل الاسم */}
+              {data.fields.name.show && (
+                <div className="space-y-2">
+                  <Label htmlFor="name">{data.fields.name.label}</Label>
+                  <Input id="name" name="name" placeholder={data.fields.name.placeholder} onChange={handleInputChange} required={data.fields.name.required} />
+                </div>
+              )}
+
+              {/* عرض حقل البريد الإلكتروني */}
+              {data.fields.email.show && (
+                <div className="space-y-2">
+                  <Label htmlFor="email">{data.fields.email.label}</Label>
+                  <Input id="email" name="email" type="email" placeholder={data.fields.email.placeholder} onChange={handleInputChange} required={data.fields.email.required} />
+                </div>
+              )}
+
+              {/* عرض حقل رقم الهاتف */}
+              {data.fields.phone.show && (
+                <div className="space-y-2">
+                  <Label htmlFor="phone">{data.fields.phone.label}</Label>
+                  <div className="flex items-center">
+                    <span className="px-3 py-2 bg-gray-200 border border-r-0 rounded-r-none rounded-l-md text-sm">+966</span>
+                    <Input id="phone" name="phone" type="tel" className="rounded-l-none" placeholder={data.fields.phone.placeholder} onChange={handleInputChange} required={data.fields.phone.required} />
+                  </div>
+                </div>
+              )}
+
+              {/* عرض حقل الرسالة */}
+              {data.fields.message.show && (
+                <div className="space-y-2">
+                  <Label htmlFor="message">{data.fields.message.label}</Label>
+                  <Textarea id="message" name="message" placeholder={data.fields.message.placeholder} onChange={handleInputChange} required={data.fields.message.required} />
+                </div>
+              )}
+
+              {/* عرض حقل الخدمة (قائمة منسدلة) */}
+              {data.fields.service.show && (
+                <div className="space-y-2">
+                  <Label htmlFor="service">{data.fields.service.label}</Label>
+                  <Select name="service" onValueChange={(value) => handleSelectChange("service", value)}>
+                    <SelectTrigger id="service">
+                      <SelectValue placeholder="اختر خدمة" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {data.fields.service.options.map((option: string) => (
+                        <SelectItem key={option} value={option}>{option}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {/* عرض حقل الموعد (كمثال، يمكن تطويره لاحقاً) */}
+              {data.fields.appointment.show && (
+                <div className="space-y-2">
+                  <Label htmlFor="appointment">{data.fields.appointment.label}</Label>
+                  <Input id="appointment" name="appointment" type="datetime-local" onChange={handleInputChange} required={data.fields.appointment.required} />
+                </div>
+              )}
+
+              {/* مربع الموافقة على الخصوصية */}
+              <div className="flex items-center space-x-2 space-x-reverse">
+                <Checkbox id="consent" onCheckedChange={(checked) => setConsent(checked as boolean)} />
+                <Label htmlFor="consent" className="text-sm font-normal text-gray-600">
+                  {data.consentText.split('[')[0]}
+                  <Link href={config.site.privacyPolicyLink} className="underline hover:text-primary">
+                    {data.consentText.match(/\[(.*?)\]/)?.[1]}
+                  </Link>
+                  {data.consentText.split(']')[1]}
+                </Label>
               </div>
             </form>
           </CardContent>
           <CardFooter>
-            <Button onClick={handleSubmit} className="w-full">{data.submitButton}</Button>
+            <Button onClick={handleSubmit} className="w-full" disabled={!consent}>
+              {data.submitButton}
+            </Button>
           </CardFooter>
         </Card>
       </div>
     </section>
   )
 }
+// --- نهاية إعادة كتابة مكون ContactSection ---
 
-// مكون التذييل (يبقى كما هو)
 const Footer = ({ data }: { data: any }) => (
   <footer className="w-full bg-gray-900 py-6">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p className="text-gray-400">{data.copyright}</p>
       <nav className="flex gap-4">
-        <Button variant="link" className="text-white hover:text-gray-200">سياسة الخصوصية</Button>
-        <Button variant="link" className="text-white hover:text-gray-200">شروط الخدمة</Button>
+        <Link href={config.site.privacyPolicyLink} passHref>
+          <Button variant="link" className="text-white hover:text-gray-200">سياسة الخصوصية</Button>
+        </Link>
+        <Link href={config.site.termsOfServiceLink} passHref>
+          <Button variant="link" className="text-white hover:text-gray-200">شروط الخدمة</Button>
+        </Link>
       </nav>
     </div>
   </footer>
 )
 
 // =================================================================
-// المحرك الديناميكي (يبقى كما هو)
+// المحرك الديناميكي
 // =================================================================
 
 export default function LandingPage() {
@@ -204,9 +296,11 @@ export default function LandingPage() {
       {config.sections.header.show && <Header data={config.site} />}
       {config.sections.hero.show && <HeroSection data={config.content.hero} />}
       {config.sections.qrCode.show && <QrCodeSection data={config.content.qrCode} />}
-      {config.sections.contact.show && <ContactSection data={config.content.contact} />}
-      {config.sections.footer.show && <Footer data={config.site} />}
       
+      {/* --- تعديل بسيط هنا لاستخدام `contactForm` بدلاً من `contact` --- */}
+      {config.sections.contact.show && <ContactSection data={config.content.contactForm} />}
+      
+      {config.sections.footer.show && <Footer data={config.site} />}
       {config.sections.guidedAssistant.show && <SmartAmbassadorGuided config={config.guidedAssistant} />}
     </main>
   )
