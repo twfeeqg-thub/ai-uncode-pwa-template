@@ -16,7 +16,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import Link from "next/link"
 
 // 2. استيراد مكون الهاتف الدولي وملف الـ CSS الخاص به
-import PhoneInput, { type E164Number } from 'react-phone-number-input'
+import PhoneInput from 'react-phone-number-input'
+import { type E164Number } from 'react-phone-number-input/core'
 import 'react-phone-number-input/style.css'
 import '../phone-input.css' // استيراد ملف التنسيقات المخصصة
 // --- نهاية التعديلات ---
