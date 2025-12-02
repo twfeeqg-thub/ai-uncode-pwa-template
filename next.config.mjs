@@ -1,4 +1,6 @@
-const withPWA = require("@ducanh2912/next-pwa").default({
+ import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
   dest: "public",
   register: true,
   skipWaiting: true,
@@ -34,4 +36,5 @@ const nextConfig = {
   // أي إعدادات أخرى لـ Next.js يمكن إضافتها هنا
 };
 
-module.exports = withPWA(nextConfig);
+export default withPWA(nextConfig);
+
