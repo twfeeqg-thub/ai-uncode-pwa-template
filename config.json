@@ -38,10 +38,10 @@
       "fields": {
         "name": { "show": true, "label": "الاسم", "placeholder": "أدخل اسمك", "required": true },
         "email": { "show": true, "label": "البريد الإلكتروني", "placeholder": "أدخل بريدك الإلكتروني", "required": false },
-        "phone": { "show": false, "label": "رقم الواتساب", "placeholder": "5xxxxxxxx", "required": false },
-        "message": { "show": false, "label": "رسالتك", "placeholder": "اكتب استفسارك هنا...", "required": true },
-        "service": { "show": false, "label": "الخدمة المطلوبة", "options": ["استشارة", "تصميم", "برمجة"] },
-        "appointment": { "show": false, "label": "حدد موعداً", "required": false }
+        "phone": { "show": true, "label": "رقم الواتساب", "placeholder": "5xxxxxxxx", "required": false },
+        "message": { "show": true, "label": "رسالتك", "placeholder": "اكتب استفسارك هنا...", "required": true },
+        "service": { "show": true, "label": "الخدمة المطلوبة", "options": ["استشارة", "تصميم", "برمجة"] },
+        "appointment": { "show": true, "label": "حدد موعداً", "required": false }
       }
     }
   },
