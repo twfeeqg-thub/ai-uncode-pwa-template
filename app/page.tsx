@@ -16,8 +16,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import Link from "next/link"
 
 // 2. استيراد مكون الهاتف الدولي وملف الـ CSS الخاص به
-import PhoneInput from 'react-phone-number-input'
-import { type E164Number } from 'react-phone-number-input/core'
+import PhoneInput, { type Value } from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import '../phone-input.css' // استيراد ملف التنسيقات المخصصة
 // --- نهاية التعديلات ---
@@ -152,7 +151,7 @@ const ContactSection = ({ data }: { data: any }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
   const [consent, setConsent] = useState(false);
   // حالة خاصة لتخزين رقم الهاتف الدولي
-  const [phoneValue, setPhoneValue] = useState<E164Number | undefined>();
+const [phoneValue, setPhoneValue] = useState<Value | undefined>();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
