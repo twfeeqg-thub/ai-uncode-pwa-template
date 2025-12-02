@@ -31,13 +31,18 @@
       "title": "ثبّت تطبيقنا الويب التقدمي",
       "description": "امسح الكود برمز الاستجابة السريعة من خلال كاميرا هاتفك لتثبيت تطبيقنا الخفيف. احصل على إشعارات فورية، وأدِر الحجوزات، والوصول إلى العروض الحصرية مباشرة من شاشتك الرئيسية. لا حاجة لمتجر التطبيقات."
     },
-    "contact": {
+    "contactForm": {
       "title": "هل لديك سؤال؟",
-      "nameLabel": "الاسم",
-      "namePlaceholder": "أدخل اسمك",
-      "emailLabel": "البريد الإلكتروني",
-      "emailPlaceholder": "أدخل بريدك الإلكتروني",
-      "submitButton": "إرسال الرسالة"
+      "submitButton": "إرسال الرسالة",
+      "consentText": "أوافق على [سياسة الخصوصية] وأسمح باستخدام بياناتي للتواصل معي بخصوص استفساري.",
+      "fields": {
+        "name": { "show": true, "label": "الاسم", "placeholder": "أدخل اسمك", "required": true },
+        "email": { "show": true, "label": "البريد الإلكتروني", "placeholder": "أدخل بريدك الإلكتروني", "required": false },
+        "phone": { "show": false, "label": "رقم الواتساب", "placeholder": "5xxxxxxxx", "required": false },
+        "message": { "show": false, "label": "رسالتك", "placeholder": "اكتب استفسارك هنا...", "required": true },
+        "service": { "show": false, "label": "الخدمة المطلوبة", "options": ["استشارة", "تصميم", "برمجة"] },
+        "appointment": { "show": false, "label": "حدد موعداً", "required": false }
+      }
     }
   },
   "guidedAssistant": {
@@ -48,25 +53,18 @@
       "message": "أهلاً بك! كيف يمكنني مساعدتك اليوم؟",
       "options": [
         { "text": "ما هي خدماتكم؟", "nextId": "servicesNode" },
-        { "text": "ما هي الأسعار؟", "nextId": "pricingNode" },
-        { "text": "كيف أتواصل معكم؟", "nextId": "contactNode" }
+        { "text": "ما هي الأسعار؟", "nextId": "pricingNode" }
       ]
     },
     "servicesNode": {
-      "message": "نحن نقدم باقة متكاملة تشمل صفحة هبوط احترافية، مساعد موجه للرد على العملاء، وتطبيق ويب خفيف (PWA) لإرسال الإشعارات.",
+      "message": "نقدم باقة متكاملة تشمل صفحة هبوط، مساعد موجه، وتطبيق ويب (PWA).",
       "options": [
         { "text": "أخبرني عن الأسعار", "nextId": "pricingNode" },
         { "text": "العودة للبداية", "nextId": "root" }
       ]
     },
     "pricingNode": {
-      "message": "تبدأ باقتنا من 99 ر.س شهرياً. يمكنك الاطلاع على كل التفاصيل في قسم الأسعار في الصفحة.",
-      "options": [
-        { "text": "العودة للبداية", "nextId": "root" }
-      ]
-    },
-    "contactNode": {
-      "message": "يمكنك التواصل معنا عبر تعبئة النموذج في قسم 'هل لديك سؤال؟' وسنقوم بالرد عليك في أقرب وقت.",
+      "message": "تبدأ باقتنا من 99 ر.س شهرياً.",
       "options": [
         { "text": "العودة للبداية", "nextId": "root" }
       ]
