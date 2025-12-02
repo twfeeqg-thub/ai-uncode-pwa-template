@@ -1,0 +1,20 @@
+.PhoneInputInput {
+  /* يمكنك تعديل هذه الأنماط لتتطابق مع تصميمك */
+  border: 1px solid hsl(var(--input));
+  background-color: hsl(var(--background));
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.PhoneInputInput:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.PhoneInputCountry {
+  margin-left: 0.5rem; /* تعديل المسافة بين العلم والحقل */
+}
+
