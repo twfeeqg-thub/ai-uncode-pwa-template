@@ -1,19 +1,24 @@
 "use client"
 
 // --- بداية التعديلات ---
-// 1. استيراد الأيقونات والمكونات الجديدة المطلوبة للنموذج الشامل
+// 1. استيراد الأيقونات والمكونات الجديدة المطلوبة
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
-import { MountainIcon, Download, Copy, Share2, Phone, Mail, MessageSquare, Calendar, Paperclip } from "lucide-react"
+import { MountainIcon, Download, Copy, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { QRCodeCanvas } from "qrcode.react"
-import { Textarea } from "@/components/ui/textarea" // حقل الرسالة
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select" // القائمة المنسدلة
-import { Checkbox } from "@/components/ui/checkbox" // مربع الموافقة
-import Link from "next/link" // للروابط
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import Link from "next/link"
+
+// 2. استيراد مكون الهاتف الدولي وملف الـ CSS الخاص به
+import PhoneInput, { type E164Number } from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import '../phone-input.css' // استيراد ملف التنسيقات المخصصة
 // --- نهاية التعديلات ---
 
 // استيراد لوحة التحكم والمساعد الموجه
@@ -21,7 +26,7 @@ import config from "../config.json"
 import { SmartAmbassadorGuided } from "@/components/ui/SmartAmbassadorGuided"
 
 // =================================================================
-// مكونات الأقسام المستقلة (Header, Hero, Footer تبقى كما هي)
+// مكونات الأقسام المستقلة (Header, Hero, Footer, QrCode تبقى كما هي)
 // =================================================================
 
 const Header = ({ data }: { data: any }) => (
@@ -48,7 +53,6 @@ const HeroSection = ({ data }: { data: any }) => (
   </section>
 )
 
-// مكون QR Code (يبقى كما هو)
 const QrCodeSection = ({ data }: { data: any }) => {
   const [pageUrl, setPageUrl] = useState("");
   const qrRef = useRef<HTMLDivElement>(null);
@@ -142,34 +146,37 @@ const QrCodeSection = ({ data }: { data: any }) => {
   );
 };
 
-// --- بداية إعادة كتابة مكون ContactSection بالكامل ---
+// --- بداية التعديل الجذري على مكون ContactSection ---
 const ContactSection = ({ data }: { data: any }) => {
-  // حالة لتخزين بيانات النموذج بالكامل
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
-  // حالة لتتبع الموافقة على الخصوصية
   const [consent, setConsent] = useState(false);
+  // حالة خاصة لتخزين رقم الهاتف الدولي
+  const [phoneValue, setPhoneValue] = useState<E164Number | undefined>();
 
-  // دالة عامة لتحديث بيانات النموذج
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // دالة خاصة لتحديث القائمة المنسدلة
   const handleSelectChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // دالة الإرسال
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!consent) {
       alert("يجب الموافقة على سياسة الخصوصية أولاً.");
       return;
     }
-    // هنا سنضيف لاحقاً الكود لإرسال البيانات إلى Supabase
+    
+    // دمج رقم الهاتف في بيانات النموذج قبل الإرسال
+    const finalFormData = {
+      ...formData,
+      phone: phoneValue,
+    };
+
     console.log("البيانات التي سيتم إرسالها:", {
-      form_data: formData,
+      form_data: finalFormData,
       consent_given: consent,
       consent_timestamp: new Date().toISOString(),
     });
@@ -201,14 +208,21 @@ const ContactSection = ({ data }: { data: any }) => {
                 </div>
               )}
 
-              {/* عرض حقل رقم الهاتف */}
+              {/* عرض حقل رقم الهاتف الدولي الجديد */}
               {data.fields.phone.show && (
                 <div className="space-y-2">
                   <Label htmlFor="phone">{data.fields.phone.label}</Label>
-                  <div className="flex items-center">
-                    <span className="px-3 py-2 bg-gray-200 border border-r-0 rounded-r-none rounded-l-md text-sm">+966</span>
-                    <Input id="phone" name="phone" type="tel" className="rounded-l-none" placeholder={data.fields.phone.placeholder} onChange={handleInputChange} required={data.fields.phone.required} />
-                  </div>
+                  <PhoneInput
+                    id="phone"
+                    name="phone"
+                    international
+                    defaultCountry="SA"
+                    value={phoneValue}
+                    onChange={setPhoneValue}
+                    className="PhoneInput"
+                    placeholder={data.fields.phone.placeholder}
+                    required={data.fields.phone.required}
+                  />
                 </div>
               )}
 
@@ -237,7 +251,7 @@ const ContactSection = ({ data }: { data: any }) => {
                 </div>
               )}
 
-              {/* عرض حقل الموعد (كمثال، يمكن تطويره لاحقاً) */}
+              {/* عرض حقل الموعد */}
               {data.fields.appointment.show && (
                 <div className="space-y-2">
                   <Label htmlFor="appointment">{data.fields.appointment.label}</Label>
@@ -268,7 +282,7 @@ const ContactSection = ({ data }: { data: any }) => {
     </section>
   )
 }
-// --- نهاية إعادة كتابة مكون ContactSection ---
+// --- نهاية التعديل الجذري ---
 
 const Footer = ({ data }: { data: any }) => (
   <footer className="w-full bg-gray-900 py-6">
@@ -296,10 +310,7 @@ export default function LandingPage() {
       {config.sections.header.show && <Header data={config.site} />}
       {config.sections.hero.show && <HeroSection data={config.content.hero} />}
       {config.sections.qrCode.show && <QrCodeSection data={config.content.qrCode} />}
-      
-      {/* --- تعديل بسيط هنا لاستخدام `contactForm` بدلاً من `contact` --- */}
       {config.sections.contact.show && <ContactSection data={config.content.contactForm} />}
-      
       {config.sections.footer.show && <Footer data={config.site} />}
       {config.sections.guidedAssistant.show && <SmartAmbassadorGuided config={config.guidedAssistant} />}
     </main>
