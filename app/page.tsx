@@ -1,22 +1,23 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
-import { MountainIcon, QrCodeIcon } from "lucide-react"
+import { useState, useRef, useEffect } from "react" // 1. إضافة useRef و useEffect
+import { MountainIcon, Download, Copy, Share2 } from "lucide-react" // 2. استبدال أيقونة QR بأيقونات الأزرار
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { QRCodeCanvas } from "qrcode.react" // 3. استيراد مكتبة QR Code
 
-// 1. استيراد لوحة التحكم
+// استيراد لوحة التحكم والمساعد الموجه
 import config from "../config.json"
-// 2. استيراد المكون الجديد
 import { SmartAmbassadorGuided } from "@/components/ui/SmartAmbassadorGuided"
 
 // =================================================================
-// مكونات الأقسام المستقلة (تبقى كما هي)
+// مكونات الأقسام المستقلة
 // =================================================================
 
+// مكون الهيدر (يبقى كما هو)
 const Header = ({ data }: { data: any }) => (
   <header className="sticky top-0 z-50 bg-background border-b">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -29,6 +30,7 @@ const Header = ({ data }: { data: any }) => (
   </header>
 )
 
+// مكون قسم الهيرو (يبقى كما هو)
 const HeroSection = ({ data }: { data: any }) => (
   <section className="w-full bg-gray-900 dark:bg-gray-800 py-20">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -41,24 +43,104 @@ const HeroSection = ({ data }: { data: any }) => (
   </section>
 )
 
-const QrCodeSection = ({ data }: { data: any }) => (
-  <section className="w-full py-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold">{data.title}</h2>
-          <p className="text-foreground/70 leading-relaxed">{data.description}</p>
-        </div>
-        <div className="flex justify-center md:justify-end">
-          <div className="border-2 border-border rounded-lg p-6 flex items-center justify-center w-48 h-48 bg-card">
-            <QrCodeIcon className="w-24 h-24 text-foreground/50" />
+// --- بداية التعديل الجذري على مكون QR Code ---
+const QrCodeSection = ({ data }: { data: any }) => {
+  const [pageUrl, setPageUrl] = useState("");
+  const qrRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // التأكد من أن الكود يعمل فقط في المتصفح
+    if (typeof window !== "undefined") {
+      setPageUrl(window.location.href);
+    }
+  }, []);
+
+  const downloadQRCode = () => {
+    if (qrRef.current) {
+      const canvas = qrRef.current.querySelector("canvas");
+      if (canvas) {
+        const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "qrcode.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
+    }
+  };
+
+  const copyQRCode = () => {
+    if (qrRef.current) {
+      const canvas = qrRef.current.querySelector("canvas");
+      if (canvas) {
+        canvas.toBlob(function(blob) {
+          if (blob) {
+            navigator.clipboard.write([
+              new ClipboardItem({ 'image/png': blob })
+            ]).then(() => alert("تم نسخ صورة الـ QR!"));
+          }
+        });
+      }
+    }
+  };
+  
+  const shareQRCode = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'رمز QR',
+        text: 'امسح هذا الرمز لتثبيت التطبيق',
+        url: pageUrl,
+      })
+    } else {
+      alert("المشاركة غير مدعومة في هذا المتصفح.");
+    }
+  };
+
+  return (
+    <section className="w-full py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold">{data.title}</h2>
+            <p className="text-foreground/70 leading-relaxed">{data.description}</p>
+          </div>
+          <div className="flex flex-col items-center md:items-end gap-4">
+            <div ref={qrRef} className="border-2 border-border rounded-lg p-4 bg-card">
+              {pageUrl ? (
+                <QRCodeCanvas
+                  value={pageUrl}
+                  size={192}
+                  bgColor={"#ffffff"}
+                  fgColor={"#000000"}
+                  level={"L"}
+                  includeMargin={false}
+                />
+              ) : (
+                <div className="w-48 h-48 bg-gray-200 animate-pulse rounded-md" />
+              )}
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" size="icon" onClick={downloadQRCode} aria-label="تنزيل الرمز">
+                <Download className="w-5 h-5" />
+              </Button>
+              <Button variant="outline" size="icon" onClick={copyQRCode} aria-label="نسخ الرمز">
+                <Copy className="w-5 h-5" />
+              </Button>
+              <Button variant="outline" size="icon" onClick={shareQRCode} aria-label="مشاركة الرمز">
+                <Share2 className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-)
+    </section>
+  );
+};
+// --- نهاية التعديل الجذري ---
 
+
+// مكون قسم التواصل (يبقى كما هو)
 const ContactSection = ({ data }: { data: any }) => {
   const [formData, setFormData] = useState({ name: "", email: "" })
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +181,7 @@ const ContactSection = ({ data }: { data: any }) => {
   )
 }
 
+// مكون التذييل (يبقى كما هو)
 const Footer = ({ data }: { data: any }) => (
   <footer className="w-full bg-gray-900 py-6">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -112,7 +195,7 @@ const Footer = ({ data }: { data: any }) => (
 )
 
 // =================================================================
-// المحرك الديناميكي الذي يجمع كل شيء
+// المحرك الديناميكي (يبقى كما هو)
 // =================================================================
 
 export default function LandingPage() {
@@ -124,7 +207,6 @@ export default function LandingPage() {
       {config.sections.contact.show && <ContactSection data={config.content.contact} />}
       {config.sections.footer.show && <Footer data={config.site} />}
       
-      {/* 3. استدعاء المكون الجديد وتمرير الإعدادات له */}
       {config.sections.guidedAssistant.show && <SmartAmbassadorGuided config={config.guidedAssistant} />}
     </main>
   )
