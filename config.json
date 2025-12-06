@@ -16,6 +16,7 @@
   "sections": {
     "header": { "show": true },
     "hero": { "show": true },
+    "services": { "show": true },
     "qrCode": { "show": true },
     "contact": { "show": true },
     "footer": { "show": true },
@@ -26,6 +27,40 @@
       "title": "حوّل عملك مع حزمتنا الرقمية المتكاملة",
       "subtitle": "من موقع ويب مذهل إلى مساعد ذكي، احصل على كل ما تحتاجه للانتقال إلى العالم الرقمي بسرعة.",
       "ctaButton": "احصل على الحزمة الآن"
+    },
+    "servicesSection": {
+      "title": "خدماتنا الطبية المتخصصة",
+      "subtitle": "نقدم مجموعة شاملة من الخدمات الطبية لتلبية جميع احتياجاتكم الصحية بأعلى معايير الجودة.",
+      "categories": [
+        {
+          "categoryName": "خدمات طب الأسنان",
+          "services": [
+            {
+              "name": "تنظيف الأسنان وإزالة الجير",
+              "description": "جلسة احترافية لإزالة التكلسات والجير للحصول على ابتسامة صحية ومشرقة.",
+              "imageUrl": "/images/services/teeth-cleaning.jpg",
+              "cta": { "text": "احجز الآن", "href": "/booking?service=teeth-cleaning" }
+            },
+            {
+              "name": "تبييض الأسنان بالليزر",
+              "description": "أحدث تقنيات تبييض الأسنان للحصول على نتائج فورية وبياض ناصع يدوم طويلاً.",
+              "imageUrl": "/images/services/teeth-whitening.jpg",
+              "cta": { "text": "احجز الآن", "href": "/booking?service=teeth-whitening" }
+            }
+          ]
+        },
+        {
+          "categoryName": "خدمات الجلدية والتجميل",
+          "services": [
+            {
+              "name": "جلسة نضارة البشرة (هيدرافيشل)",
+              "description": "علاج متكامل لتنظيف وترطيب البشرة بعمق، مما يمنحها نضارة وحيوية فورية.",
+              "imageUrl": "/images/services/hydrafacial.jpg",
+              "cta": { "text": "احجز الآن", "href": "/booking?service=hydrafacial" }
+            }
+          ]
+        }
+      ]
     },
     "qrCode": {
       "title": "ثبّت تطبيقنا الويب التقدمي",
@@ -57,7 +92,7 @@
       ]
     },
     "servicesNode": {
-      "message": "نقدم باقة متكاملة تشمل صفحة هبوط، مساعد موجه، وتطبيق ويب (PWA).",
+      "message": "نقدم باقة متكاملة تشمل صفحة هبوط، مساعد موجه، وتطبيق ويب (PWA ).",
       "options": [
         { "text": "أخبرني عن الأسعار", "nextId": "pricingNode" },
         { "text": "العودة للبداية", "nextId": "root" }
