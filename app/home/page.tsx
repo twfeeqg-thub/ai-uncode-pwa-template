@@ -1,4 +1,5 @@
-// app/home/page.tsx
+// File: app/home/page.tsx
+
 import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
