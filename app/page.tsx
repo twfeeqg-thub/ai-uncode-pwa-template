@@ -11,10 +11,11 @@ const HeroSection = dynamic(() => import('@/components/common/HeroSection'));
 const QrCodeSection = dynamic(() => import('@/components/common/QrCodeSection'));
 const ContactSection = dynamic(() => import('@/components/common/ContactSection'));
 const Footer = dynamic(() => import('@/components/common/Footer'));
+const FaqSection = dynamic(() => import('@/components/common/FaqSection')); // --- جديد
 
 // استيراد ديناميكي للأقسام المتخصصة
 const ServicesSection = dynamic(() => import('@/components/sectors/Clinics/ServicesSection'));
-const DoctorsSection = dynamic(() => import('@/components/sectors/Clinics/DoctorsSection')); // --- جديد
+const DoctorsSection = dynamic(() => import('@/components/sectors/Clinics/DoctorsSection'));
 
 // استيراد المساعد الموجه
 const SmartAmbassadorGuided = dynamic(() => 
@@ -28,7 +29,8 @@ export default function LandingPage() {
       {config.sections.hero.show && <HeroSection data={config.content.hero} />}
       
       {config.sections.services.show && <ServicesSection data={config.content.servicesSection} />}
-      {config.sections.doctors.show && <DoctorsSection data={config.content.doctorsSection} />} {/* --- جديد */}
+      {config.sections.doctors.show && <DoctorsSection data={config.content.doctorsSection} />}
+      {config.sections.faq.show && <FaqSection data={config.content.faqSection} />} {/* --- جديد */}
       
       {config.sections.qrCode.show && <QrCodeSection data={config.content.qrCode} />}
       {config.sections.contact.show && <ContactSection data={config.content.contactForm} />}
