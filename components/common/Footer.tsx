@@ -1,8 +1,8 @@
-// File: components/common/Footer.tsx
+// File: components/common/Footer.tsx (النسخة المصححة)
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import config from "../../config.json"; // <-- تعديل المسار للوصول لملف config
+import config from "@/config.json"; // <-- هذا هو السطر الذي تم إصلاحه
 
 const Footer = ({ data }: { data: any }) => (
   <footer className="w-full bg-gray-900 py-6">
