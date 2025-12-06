@@ -1,0 +1,58 @@
+.
+├── README.md
+├── app
+│   ├── components
+│   │   └── placeholder.txt
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── home
+│   │   └── page.tsx
+│   ├── layout.tsx
+│   ├── manifest.ts
+│   └── page.tsx
+├── components
+│   ├── common
+│   │   ├── ContactSection.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── QrCodeSection.tsx
+│   │   └── keep.
+│   ├── sectors
+│   │   └── Clinics
+│   └── ui
+│       ├── SmartAmbassadorGuided.tsx
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── checkbox.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       ├── select.tsx
+│       └── textarea.tsx
+├── components.json
+├── config.json
+├── eslint.config.mjs
+├── lib
+│   ├── supabaseClient.ts
+│   └── utils.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── phone-input.css
+├── postcss.config.js
+├── postcss.config.mjs
+├── project_structure.txt
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── public
+│   │   ├── apple-icon.png
+│   │   ├── icon-192x192.png
+│   │   └── icon-512x512.png
+│   ├── vercel.svg
+│   └── window.svg
+├── tailwind.config.js
+└── tsconfig.json
+
+12 directories, 44 files
