@@ -1,12 +1,12 @@
-// File: components/common/ContactSection.tsx
+// File: components/common/ContactSection.tsx (النسخة المصححة)
 
-"use client"; // <-- مهم جدًا لأن المكون يستخدم hooks
+"use client";
 
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
-import config from "../../config.json"; // <-- تعديل المسار للوصول لملف config
+import config from "@/config.json"; // <-- هذا هو السطر الذي تم إصلاحه
 
 // استيراد الأيقونات
 import { Loader2, CheckCircle, XCircle } from "lucide-react";
@@ -23,13 +23,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 // استيراد مكون الهاتف
 import PhoneInput, { type Value } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import '../../phone-input.css'; // <-- تعديل المسار للوصول لملف الأنماط
+import '@/phone-input.css'; // <-- تم إصلاح هذا المسار أيضًا
 
 const ContactSection = ({ data }: { data: any }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
   const [consent, setConsent] = useState(false);
   const [phoneValue, setPhoneValue] = useState<Value | undefined>();
-  
+      
   const [isLoading, setIsLoading] = useState(false);
   const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -117,47 +117,12 @@ const ContactSection = ({ data }: { data: any }) => {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="grid gap-6">
-              {data.fields.name.show && (
-                <div className="space-y-2">
-                  <Label htmlFor="name">{data.fields.name.label}</Label>
-                  <Input id="name" name="name" placeholder={data.fields.name.placeholder} onChange={handleInputChange} required={data.fields.name.required} />
-                </div>
-              )}
-              {data.fields.email.show && (
-                <div className="space-y-2">
-                  <Label htmlFor="email">{data.fields.email.label}</Label>
-                  <Input id="email" name="email" type="email" placeholder={data.fields.email.placeholder} onChange={handleInputChange} required={data.fields.email.required} />
-                </div>
-              )}
-              {data.fields.phone.show && (
-                <div className="space-y-2">
-                  <Label htmlFor="phone">{data.fields.phone.label}</Label>
-                  <PhoneInput id="phone" name="phone" international defaultCountry="SA" value={phoneValue} onChange={setPhoneValue} className="PhoneInput" placeholder={data.fields.phone.placeholder} required={data.fields.phone.required} />
-                </div>
-              )}
-              {data.fields.message.show && (
-                <div className="space-y-2">
-                  <Label htmlFor="message">{data.fields.message.label}</Label>
-                  <Textarea id="message" name="message" placeholder={data.fields.message.placeholder} onChange={handleInputChange} required={data.fields.message.required} />
-                </div>
-              )}
-              {data.fields.service.show && (
-                <div className="space-y-2">
-                  <Label htmlFor="service">{data.fields.service.label}</Label>
-                  <Select name="service" onValueChange={(value) => handleSelectChange("service", value)}>
-                    <SelectTrigger id="service"><SelectValue placeholder="اختر خدمة" /></SelectTrigger>
-                    <SelectContent>
-                      {data.fields.service.options.map((option: string) => (<SelectItem key={option} value={option}>{option}</SelectItem>))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
-              {data.fields.appointment.show && (
-                <div className="space-y-2">
-                  <Label htmlFor="appointment">{data.fields.appointment.label}</Label>
-                  <Input id="appointment" name="appointment" type="datetime-local" onChange={handleInputChange} required={data.fields.appointment.required} />
-                </div>
-              )}
+              {data.fields.name.show && ( <div className="space-y-2"> <Label htmlFor="name">{data.fields.name.label}</Label> <Input id="name" name="name" placeholder={data.fields.name.placeholder} onChange={handleInputChange} required={data.fields.name.required} /> </div> )}
+              {data.fields.email.show && ( <div className="space-y-2"> <Label htmlFor="email">{data.fields.email.label}</Label> <Input id="email" name="email" type="email" placeholder={data.fields.email.placeholder} onChange={handleInputChange} required={data.fields.email.required} /> </div> )}
+              {data.fields.phone.show && ( <div className="space-y-2"> <Label htmlFor="phone">{data.fields.phone.label}</Label> <PhoneInput id="phone" name="phone" international defaultCountry="SA" value={phoneValue} onChange={setPhoneValue} className="PhoneInput" placeholder={data.fields.phone.placeholder} required={data.fields.phone.required} /> </div> )}
+              {data.fields.message.show && ( <div className="space-y-2"> <Label htmlFor="message">{data.fields.message.label}</Label> <Textarea id="message" name="message" placeholder={data.fields.message.placeholder} onChange={handleInputChange} required={data.fields.message.required} /> </div> )}
+              {data.fields.service.show && ( <div className="space-y-2"> <Label htmlFor="service">{data.fields.service.label}</Label> <Select name="service" onValueChange={(value) => handleSelectChange("service", value)}> <SelectTrigger id="service"><SelectValue placeholder="اختر خدمة" /></SelectTrigger> <SelectContent> {data.fields.service.options.map((option: string) => (<SelectItem key={option} value={option}>{option}</SelectItem>))} </SelectContent> </Select> </div> )}
+              {data.fields.appointment.show && ( <div className="space-y-2"> <Label htmlFor="appointment">{data.fields.appointment.label}</Label> <Input id="appointment" name="appointment" type="datetime-local" onChange={handleInputChange} required={data.fields.appointment.required} /> </div> )}
               <div className="flex items-center space-x-2 space-x-reverse">
                 <Checkbox id="consent" onCheckedChange={(checked) => setConsent(checked as boolean)} />
                 <Label htmlFor="consent" className="text-sm font-normal text-gray-600">
