@@ -8,6 +8,7 @@
 │   ├── layout.tsx
 │   ├── manifest.ts
 │   └── page.tsx
+├── code_review.txt
 ├── components
 │   └── ui
 │       ├── SmartAmbassadorGuided.tsx
@@ -20,6 +21,7 @@
 │       └── textarea.tsx
 ├── components.json
 ├── config.json
+├── config_review.txt
 ├── eslint.config.mjs
 ├── lib
 │   ├── supabaseClient.ts
@@ -45,4 +47,4 @@
 ├── tailwind.config.js
 └── tsconfig.json
 
-8 directories, 38 files
+8 directories, 40 files
