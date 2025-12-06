@@ -1,16 +1,19 @@
-// manifest.ts
+// File: manifest.ts (النسخة النهائية والمضمونة)
+
 import { MetadataRoute } from 'next'
-import config from './config.json'
+
+// تم إزالة "import config from './config.json'"
+// تم كتابة القيم مباشرة لتجنب أخطاء البناء
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: config.pwa.appName,
-    short_name: config.pwa.appShortName,
-    description: config.pwa.appDescription,
-    start_url: '/home', // <-- النقطة السحرية: يبدأ التطبيق من هنا بعد التثبيت
+    name: "تطبيق أيكود", // مأخوذة من config.pwa.appName
+    short_name: "أيكود", // مأخوذة من config.pwa.appShortName
+    description: "تطبيقنا الرسمي للحصول على آخر العروض والإشعارات.", // مأخوذة من config.pwa.appDescription
+    start_url: '/home',
     display: 'standalone',
-    background_color: config.pwa.backgroundColor,
-    theme_color: config.pwa.themeColor,
+    background_color: "#FFFFFF", // مأخوذة من config.pwa.backgroundColor
+    theme_color: "#0A0A0A", // مأخوذة من config.pwa.themeColor
     icons: [
       {
         src: '/favicon.ico',
@@ -35,3 +38,4 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
   }
 }
+
