@@ -17,6 +17,7 @@
     "header": { "show": true },
     "hero": { "show": true },
     "services": { "show": true },
+    "doctors": { "show": true },
     "qrCode": { "show": true },
     "contact": { "show": true },
     "footer": { "show": true },
@@ -59,6 +60,30 @@
               "cta": { "text": "احجز الآن", "href": "/booking?service=hydrafacial" }
             }
           ]
+        }
+      ]
+    },
+    "doctorsSection": {
+      "title": "تعرف على فريقنا الطبي المتميز",
+      "subtitle": "نفخر بضم نخبة من الأطباء والاستشاريين المتخصصين لتقديم أفضل رعاية صحية لكم.",
+      "doctors": [
+        {
+          "name": "د. محمد عبد العزيز",
+          "specialty": "استشاري طب وجراحة الأسنان",
+          "bio": "متخصص في زراعة الأسنان وتجميل الابتسامة، يؤمن بأن الابتسامة الصحية هي مفتاح الثقة بالنفس.",
+          "imageUrl": "/images/doctors/doctor-male-1.jpg",
+          "experience": "خبرة 12 عامًا",
+          "profileUrl": null,
+          "bookingCta": { "text": "احجز مع د. محمد", "href": "/booking?doctor=mohamed-abdulaziz" }
+        },
+        {
+          "name": "د. سارة العمري",
+          "specialty": "استشارية الأمراض الجلدية والتجميل",
+          "bio": "خبيرة في علاجات الليزر ونضارة البشرة، تسعى دائمًا لتقديم أحدث التقنيات بأمان وفعالية.",
+          "imageUrl": "/images/doctors/doctor-female-1.jpg",
+          "experience": "خبرة 10 سنوات",
+          "profileUrl": null,
+          "bookingCta": { "text": "احجز مع د. سارة", "href": "/booking?doctor=sara-alamri" }
         }
       ]
     },
