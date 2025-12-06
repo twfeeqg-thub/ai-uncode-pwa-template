@@ -1,42 +1,22 @@
-// File: app/page.tsx (النسخة المنظفة بعد النقل)
+// File: app/page.tsx (النسخة النهائية والمحسنة)
 
-"use client"
+"use client";
 
-// --- بداية التعديلات ---
-// 1. استيراد الأيقونات والمكونات الجديدة المطلوبة
-import type React from "react"
-// هذه الاستيرادات لم تعد ضرورية هنا مباشرة، ولكن سنتركها مؤقتًا
-import { useState, useRef, useEffect } from "react"
-import { MountainIcon, Download, Copy, Share2, Loader2, CheckCircle, XCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { QRCodeCanvas } from "qrcode.react"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import Link from "next/link"
-import PhoneInput, { type Value } from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
-import '../phone-input.css'
+import config from "../config.json";
+import dynamic from 'next/dynamic';
 
-// 2. استيراد ملف الاتصال بـ Supabase
-import { supabase } from "@/lib/supabaseClient"
-// --- نهاية التعديلات ---
+// استيراد ديناميكي للأقسام المشتركة
+// سيتم تحميل كود كل قسم فقط إذا كانت قيمته `show: true` في config.json
+const Header = dynamic(() => import('@/components/common/Header'));
+const HeroSection = dynamic(() => import('@/components/common/HeroSection'));
+const QrCodeSection = dynamic(() => import('@/components/common/QrCodeSection'));
+const ContactSection = dynamic(() => import('@/components/common/ContactSection'));
+const Footer = dynamic(() => import('@/components/common/Footer'));
 
-// استيراد لوحة التحكم والمساعد الموجه
-import config from "../config.json"
-import { SmartAmbassadorGuided } from "@/components/ui/SmartAmbassadorGuided"
-
-// =================================================================
-// تم نقل جميع مكونات الأقسام إلى مجلد components/common
-// =================================================================
-
-
-// =================================================================
-// المحرك الديناميكي
-// =================================================================
+// استيراد المساعد الموجه (نفترض أنه موجود في ui كما في الكود الأصلي)
+const SmartAmbassadorGuided = dynamic(() => 
+  import('@/components/ui/SmartAmbassadorGuided').then(mod => mod.SmartAmbassadorGuided)
+);
 
 export default function LandingPage() {
   return (
@@ -48,5 +28,5 @@ export default function LandingPage() {
       {config.sections.footer.show && <Footer data={config.site} />}
       {config.sections.guidedAssistant.show && <SmartAmbassadorGuided config={config.guidedAssistant} />}
     </main>
-  )
+  );
 }
