@@ -1,4 +1,4 @@
-// File: app/home/page.tsx
+// File: app/home/page.tsx (العودة للحالة المستقرة)
 
 import { Button } from "@/components/ui/button";
 
