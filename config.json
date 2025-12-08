@@ -154,6 +154,34 @@
           "complianceText": "العرض سارٍ حتى نفاد الكمية."
         }
       ]
+    },
+    "profileSection": {
+      "title": "ملفي الشخصي",
+      "editButtonText": "تعديل المعلومات",
+      "saveButtonText": "حفظ التغييرات",
+      "cancelButtonText": "إلغاء",
+      "userData": {
+        "name": "عبد الله الراجحي",
+        "phone": "501234567",
+        "email": "a.alrajhi@example.com"
+      },
+      "compliance": {
+        "privacyNotice": {
+          "text": "تُستخدم هذه المعلومات لإدارة حجوزاتك. لمعرفة المزيد، اقرأ",
+          "linkText": "سياسة الخصوصية.",
+          "href": "/privacy"
+        },
+        "reportIssue": {
+          "text": "هل تواجه مشكلة أو تريد الإبلاغ عن انتهاك؟",
+          "linkText": "تواصل مع فريق الدعم.",
+          "href": "/support"
+        },
+        "deleteAccount": {
+          "text": "لحذف حسابك وجميع بياناتك بشكل نهائي،",
+          "linkText": "اطلب الحذف من هنا.",
+          "href": "/account-deletion-request"
+        }
+      }
     }
   },
   "guidedAssistant": {
@@ -168,7 +196,7 @@
       ]
     },
     "servicesNode": {
-      "message": "نقدم باقة متكاملة تشمل صفحة هبوط، مساعد موجه، وتطبيق ويب (PWA ).",
+      "message": "نقدم باقة متكاملة تشمل صفحة هبوط، مساعد موجه، وتطبيق ويب (PWA  ).",
       "options": [
         { "text": "أخبرني عن الأسعار", "nextId": "pricingNode" },
         { "text": "العودة للبداية", "nextId": "root" }
