@@ -126,30 +126,6 @@
         "service": { "show": true, "label": "الخدمة المطلوبة", "options": ["استشارة", "تصميم", "برمجة"] },
         "appointment": { "show": true, "label": "حدد موعداً", "required": false }
       }
-    },
-    "myBookings": {
-      "title": "حجوزاتي",
-      "upcomingTitle": "المواعيد القادمة",
-      "pastTitle": "المواعيد السابقة",
-      "noBookingsText": "لا توجد لديك حجوزات حاليًا.",
-      "bookings": [
-        {
-          "id": "BK12345",
-          "date": "2025-12-10",
-          "time": "11:30",
-          "serviceName": "تنظيف الأسنان وإزالة الجير",
-          "doctorName": "د. محمد عبد العزيز",
-          "status": "upcoming"
-        },
-        {
-          "id": "BK12346",
-          "date": "2025-11-20",
-          "time": "16:00",
-          "serviceName": "جلسة نضارة البشرة (هيدرافيشل)",
-          "doctorName": "د. سارة العمري",
-          "status": "completed"
-        }
-      ]
     }
   },
   "guidedAssistant": {
