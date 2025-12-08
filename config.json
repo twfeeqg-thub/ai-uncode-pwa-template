@@ -126,6 +126,34 @@
         "service": { "show": true, "label": "الخدمة المطلوبة", "options": ["استشارة", "تصميم", "برمجة"] },
         "appointment": { "show": true, "label": "حدد موعداً", "required": false }
       }
+    },
+    "offersSection": {
+      "title": "عروض حصرية لك",
+      "subtitle": "استفد من أحدث العروض والخصومات المتاحة لفترة محدودة.",
+      "offers": [
+        {
+          "id": "offer-001",
+          "title": "عرض تبييض الأسنان بالليزر",
+          "description": "احصل على ابتسامة هوليوود مع جلستنا لتبييض الأسنان بالليزر.",
+          "newPrice": "499 ر.س",
+          "oldPrice": "750 ر.س",
+          "validUntil": "2025-12-31",
+          "ctaText": "احصل على العرض",
+          "isFeatured": true,
+          "complianceText": "تطبق الشروط والأحكام."
+        },
+        {
+          "id": "offer-002",
+          "title": "باقة العناية بالبشرة",
+          "description": "جلستا تنظيف بشرة عميق مع قناع الذهب.",
+          "newPrice": "350 ر.س",
+          "oldPrice": "500 ر.س",
+          "validUntil": "2025-12-20",
+          "ctaText": "احصل على العرض",
+          "isFeatured": false,
+          "complianceText": "العرض سارٍ حتى نفاد الكمية."
+        }
+      ]
     }
   },
   "guidedAssistant": {
