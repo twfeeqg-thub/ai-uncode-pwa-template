@@ -1,13 +1,24 @@
-// File: app/home/page.tsx (العودة للحالة المستقرة)
+// File: app/home/page.tsx (النسخة النهائية)
 
-import { Button } from "@/components/ui/button";
+import config from '../../config.json'; // استيراد ملف الإعدادات الرئيسي
+import OffersSection from '@/components/sectors/Clinics/OffersSection'; // استيراد مكون العروض
 
 export default function HomePage() {
   return (
-    <div dir="rtl" className="flex flex-col items-center justify-center min-h-screen bg-background p-8 text-center">
-      <h1 className="text-4xl font-bold mb-4">أهلاً بك في تطبيقك</h1>
-      <p className="text-lg text-muted-foreground mb-8">هذه هي لوحة التحكم الخاصة بك. هنا ستجد حجوزاتك وعروضك الخاصة.</p>
-      <Button>عرض حجوزاتي</Button>
+    <div dir="rtl" className="w-full bg-background">
+      {/* 
+        هنا يمكننا إضافة مكونات أخرى في المستقبل، مثل لوحة تحكم المستخدم أو رسالة ترحيب.
+        حالياً، سنعرض قسم العروض مباشرة.
+      */}
+
+      {/* التحقق من وجود بيانات القسم قبل محاولة عرضه لزيادة أمان الكود */}
+      {config.content.offersSection && (
+        <OffersSection data={config.content.offersSection} />
+      )}
+
+      {/* يمكنك إضافة أقسام أخرى هنا في المستقبل */}
+      {/* مثال: <MyUpcomingAppointments /> */}
+      
     </div>
   );
 }
