@@ -1,0 +1,69 @@
+🧱 AI-Uncode – Project Card (AUTO-GENERATED)
+==========================================
+
+1️⃣ Identity
+Project Name: ai-uncode-pwa-template
+Monorepo Package: N/A (standalone project)
+Detected Type:
+- Web App / Template
+
+2️⃣ Purpose (Auto-Inferred)
+From README.md:
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+
+3️⃣ Responsibilities (Observed)
+- Handles UI rendering
+- Communicates with Supabase
+- Manages authentication logic
+
+4️⃣ Dependencies
+Dependencies (top-level):
+"@ducanh2912/next-pwa"
+"@radix-ui/react-checkbox"
+"@radix-ui/react-label"
+"@radix-ui/react-select"
+"@radix-ui/react-slot"
+"@supabase/supabase-js"
+"class-variance-authority"
+"clsx"
+"libphonenumber-js"
+"lucide-react"
+"next"
+"qrcode.react"
+"react"
+"react-dom"
+"react-phone-number-input"
+"tailwind-merge"
+"tailwindcss-animate"
+
+5️⃣ Data & Config
+- Uses Supabase (tables/config/auth)
+
+6️⃣ Observations & Risks (Auto)
+- Business logic may be mixed with UI (needs review)
+- No explicit schema validation detected (Zod?)
+
+7️⃣ AI Constraints (Default)
+- Do not refactor logic yet
+- Structure and boundaries only
+
+Generated on: Sun Dec 14 04:42:51 UTC 2025
