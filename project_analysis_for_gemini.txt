@@ -1,0 +1,645 @@
+=== PROJECT STRUCTURE ===
+.
+./postcss.config.js
+./components
+./components/sectors
+./components/sectors/Clinics
+./components/sectors/Clinics/DoctorsSection.tsx
+./components/sectors/Clinics/ProfileSection.tsx
+./components/sectors/Clinics/ServicesSection.tsx
+./components/sectors/Clinics/OffersSection.tsx
+./components/ui
+./components/ui/input.tsx
+./components/ui/button.tsx
+./components/ui/textarea.tsx
+./components/ui/select.tsx
+./components/ui/checkbox.tsx
+./components/ui/card.tsx
+./components/ui/SmartAmbassadorGuided.tsx
+./components/ui/badge.tsx
+./components/ui/label.tsx
+./components/common
+./components/common/QrCodeSection.tsx
+./components/common/InstallPromptHandler.tsx
+./components/common/HeroSection.tsx
+./components/common/ContactSection.tsx
+./components/common/keep.
+./components/common/Header.tsx
+./components/common/FaqSection.tsx
+./components/common/Footer.tsx
+./tsconfig.json
+./project_analysis_for_gemini.txt
+./lib
+./lib/supabaseClient.ts
+./lib/utils.ts
+./package.json
+./generate_project_card.sh
+./create_template_profile.sh
+./postcss.config.mjs
+./components.json
+./eslint.config.mjs
+./package-lock.json
+./public
+./public/images
+./public/images/doctors
+./public/images/doctors/doctor-female-1.jpg
+./public/images/doctors/doctor-male-1.jpg
+./public/images/services
+./public/images/services/teeth-cleaning.jpg
+./public/images/services/keep.
+./public/images/services/hydrafacial.jpg
+./public/images/services/teeth-whitening.jpg
+./public/window.svg
+./public/globe.svg
+./public/next.svg
+./public/vercel.svg
+./public/file.svg
+./phone-input.css
+./template_profile.txt
+./project_structure.txt
+./tailwind.config.js
+./PROJECT_CARD.generated.txt
+./README.md
+./app
+./app/components
+./app/components/placeholder.txt
+./app/layout.tsx
+./app/providers.tsx
+./app/home
+./app/home/page.tsx
+./app/favicon.ico
+./app/globals.css
+./app/page.tsx
+./app/manifest.ts
+./next.config.mjs
+./config.json
+
+=== PACKAGE JSON (Dependencies) ===
+{
+  "name": "nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.7",
+    "@radix-ui/react-checkbox": "^1.3.3",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/supabase-js": "^2.43.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "libphonenumber-js": "^1.12.30",
+    "lucide-react": "^0.390.0",
+    "next": "14.2.3",
+    "qrcode.react": "^3.2.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-phone-number-input": "^3.4.14",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5"
+  }
+}
+
+=== TAILWIND CONFIG ===
+
+=== APP PAGE (THE BRAIN) ===
+// File: app/page.tsx (النسخة النهائية والمحسنة)
+
+"use client";
+
+import config from "../config.json";
+import dynamic from 'next/dynamic';
+
+// استيراد ديناميكي للأقسام المشتركة
+const Header = dynamic(() => import('@/components/common/Header'));
+const HeroSection = dynamic(() => import('@/components/common/HeroSection'));
+const QrCodeSection = dynamic(() => import('@/components/common/QrCodeSection'));
+const ContactSection = dynamic(() => import('@/components/common/ContactSection'));
+const Footer = dynamic(() => import('@/components/common/Footer'));
+const FaqSection = dynamic(() => import('@/components/common/FaqSection')); // --- جديد
+
+// استيراد ديناميكي للأقسام المتخصصة
+const ServicesSection = dynamic(() => import('@/components/sectors/Clinics/ServicesSection'));
+const DoctorsSection = dynamic(() => import('@/components/sectors/Clinics/DoctorsSection'));
+
+// استيراد المساعد الموجه
+const SmartAmbassadorGuided = dynamic(() => 
+  import('@/components/ui/SmartAmbassadorGuided').then(mod => mod.SmartAmbassadorGuided)
+);
+
+export default function LandingPage() {
+  return (
+    <main className="w-full" dir="rtl">
+      {config.sections.header.show && <Header data={config.site} />}
+      {config.sections.hero.show && <HeroSection data={config.content.hero} />}
+      
+      {config.sections.services.show && <ServicesSection data={config.content.servicesSection} />}
+      {config.sections.doctors.show && <DoctorsSection data={config.content.doctorsSection} />}
+      {config.sections.faq.show && <FaqSection data={config.content.faqSection} />} {/* --- جديد */}
+      
+      {config.sections.qrCode.show && <QrCodeSection data={config.content.qrCode} />}
+      {config.sections.contact.show && <ContactSection data={config.content.contactForm} />}
+      {config.sections.footer.show && <Footer data={config.site} />}
+      {config.sections.guidedAssistant.show && <SmartAmbassadorGuided config={config.guidedAssistant} />}
+    </main>
+  );
+}
+
+=== SAMPLE COMPONENTS LOGIC ===
+--- File: components/common/ContactSection.tsx ---
+// File: components/common/ContactSection.tsx (النسخة المصححة)
+
+"use client";
+
+import type React from "react";
+import { useState } from "react";
+import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
+import config from "@/config.json"; // <-- هذا هو السطر الذي تم إصلاحه
+
+// استيراد الأيقونات
+import { Loader2, CheckCircle, XCircle } from "lucide-react";
+
+// استيراد مكونات واجهة المستخدم
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+
+// استيراد مكون الهاتف
+import PhoneInput, { type Value } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import '@/phone-input.css'; // <-- تم إصلاح هذا المسار أيضًا
+
+const ContactSection = ({ data }: { data: any }) => {
+  const [formData, setFormData] = useState<{ [key: string]: any }>({});
+  const [consent, setConsent] = useState(false);
+  const [phoneValue, setPhoneValue] = useState<Value | undefined>();
+      
+  const [isLoading, setIsLoading] = useState(false);
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+--- File: components/common/FaqSection.tsx ---
+// components/common/FaqSection.tsx
+
+"use client"; // هذا المكون تفاعلي، لذا يحتاج أن يكون Client Component
+
+import React, { useState } from 'react';
+
+// تعريف أنواع البيانات (Types)
+interface Cta {
+  text: string;
+  href: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface FaqSectionProps {
+  data: {
+    title: string;
+    subtitle: string;
+    contactCta?: Cta | null;
+    faqs: FaqItem[];
+  };
+}
+
+// مكون فرعي لكل سؤال وجواب (الأكورديون الداخلي)
+const FaqAccordionItem: React.FC<{ item: FaqItem }> = ({ item }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-gray-200 py-4">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center justify-between w-full text-right"
+      >
+        <span className="text-lg font-semibold text-gray-800">{item.question}</span>
+        {/* أيقونة السهم تتغير حسب الحالة */}
+        <svg
+          className={`w-5 h-5 text-gray-500 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+--- File: components/common/Footer.tsx ---
+// File: components/common/Footer.tsx (النسخة المصححة)
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import config from "@/config.json"; // <-- هذا هو السطر الذي تم إصلاحه
+
+const Footer = ({ data }: { data: any }) => (
+  <footer className="w-full bg-gray-900 py-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p className="text-gray-400">{data.copyright}</p>
+      <nav className="flex gap-4">
+        <Link href={config.site.privacyPolicyLink} passHref>
+          <Button variant="link" className="text-white hover:text-gray-200">سياسة الخصوصية</Button>
+        </Link>
+        <Link href={config.site.termsOfServiceLink} passHref>
+          <Button variant="link" className="text-white hover:text-gray-200">شروط الخدمة</Button>
+        </Link>
+      </nav>
+    </div>
+  </footer>
+);
+
+export default Footer;
+--- File: components/common/Header.tsx ---
+// File: components/common/Header.tsx
+
+import { MountainIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const Header = ({ data }: { data: any }) => (
+  <header className="sticky top-0 z-50 bg-background border-b">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <span className="font-bold text-lg">{data.name}</span>
+        <MountainIcon className="w-6 h-6 text-primary" />
+      </div>
+      <Button variant="ghost">{data.contactButton}</Button>
+    </div>
+  </header>
+);
+
+export default Header;
+--- File: components/common/HeroSection.tsx ---
+// File: components/common/HeroSection.tsx
+
+import { Button } from "@/components/ui/button";
+
+const HeroSection = ({ data }: { data: any }) => (
+  <section className="w-full bg-gray-900 dark:bg-gray-800 py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 className="text-5xl font-bold tracking-tighter text-white mb-6">{data.title}</h1>
+      <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">{data.subtitle}</p>
+      <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+        {data.ctaButton}
+      </Button>
+    </div>
+  </section>
+);
+
+export default HeroSection;
+--- File: components/common/InstallPromptHandler.tsx ---
+// components/common/InstallPromptHandler.tsx
+
+"use client";
+
+import React, { useState, useEffect } from 'react';
+
+// تعريف نوع مخصص لحدث التثبيت لإرضاء TypeScript
+interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: string[];
+  readonly userChoice: Promise<{
+    outcome: 'accepted' | 'dismissed';
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
+}
+
+const InstallPromptHandler = () => {
+  // حالة لتخزين حدث التثبيت
+  const [installPromptEvent, setInstallPromptEvent] = useState<BeforeInstallPromptEvent | null>(null);
+  // حالة للتحكم في إظهار وإخفاء اللافتة
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event: Event) => {
+      // منع النافذة المنبثقة التلقائية
+      event.preventDefault();
+      // تخزين الحدث في الحالة لنتمكن من استخدامه لاحقًا
+      setInstallPromptEvent(event as BeforeInstallPromptEvent);
+      // إظهار اللافتة المخصصة التي صممناها
+      setShowBanner(true);
+    };
+
+    // إضافة المستمع للحدث
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    // تنظيف المستمع عند إزالة المكون من الشاشة (ممارسة جيدة)
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []); // المصفوفة الفارغة تضمن أن هذا التأثير يعمل مرة واحدة فقط
+--- File: components/common/QrCodeSection.tsx ---
+// File: components/common/QrCodeSection.tsx
+
+"use client"; // <-- مهم جدًا لأن المكون يستخدم hooks
+
+import { useState, useRef, useEffect } from "react";
+import { QRCodeCanvas } from "qrcode.react";
+import { Button } from "@/components/ui/button";
+import { Download, Copy, Share2 } from "lucide-react";
+
+const QrCodeSection = ({ data }: { data: any }) => {
+  const [pageUrl, setPageUrl] = useState("");
+  const qrRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPageUrl(window.location.href);
+    }
+  }, []);
+
+  const downloadQRCode = () => {
+    if (qrRef.current) {
+      const canvas = qrRef.current.querySelector("canvas");
+      if (canvas) {
+        const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "qrcode.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
+    }
+  };
+
+  const copyQRCode = () => {
+    if (qrRef.current) {
+      const canvas = qrRef.current.querySelector("canvas");
+      if (canvas) {
+        canvas.toBlob(function(blob) {
+          if (blob) {
+--- File: components/ui/SmartAmbassadorGuided.tsx ---
+"use client"
+
+import { useState, useRef, useEffect } from "react"
+import { X, Volume2, VolumeX, RotateCcw } from "lucide-react"
+import Image from "next/image"
+
+interface Message {
+  type: "user" | "bot";
+  text: string;
+}
+
+interface Option {
+  text: string;
+  nextId: string;
+}
+
+interface CurrentNode {
+  message: string;
+  options: Option[];
+}
+
+export function SmartAmbassadorGuided({ config }: { config: any }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [messages, setMessages] = useState<Message[]>([])
+  const [currentNode, setCurrentNode] = useState<CurrentNode>(config.root)
+  const [isMuted, setIsMuted] = useState(true) // الصوت مكتوم افتراضياً
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const audioContextRef = useRef<AudioContext | null>(null)
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages, currentNode])
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !audioContextRef.current) {
+      try {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      } catch (e) {
+        console.error("Web Audio API is not supported in this browser.", e);
+      }
+
+=== CONFIG JSON CONTENT ===
+{
+  "site": {
+    "name": "أيكود",
+    "contactButton": "تواصل معنا",
+    "copyright": "© 2025 أيكود. جميع الحقوق محفوظة.",
+    "privacyPolicyLink": "/privacy",
+    "termsOfServiceLink": "/terms"
+  },
+  "pwa": {
+    "appName": "تطبيق أيكود",
+    "appShortName": "أيكود",
+    "appDescription": "تطبيقنا الرسمي للحصول على آخر العروض والإشعارات.",
+    "themeColor": "#0A0A0A",
+    "backgroundColor": "#FFFFFF"
+  },
+  "sections": {
+    "header": { "show": true },
+    "hero": { "show": true },
+    "services": { "show": true },
+    "doctors": { "show": true },
+    "faq": { "show": true },
+    "qrCode": { "show": true },
+    "contact": { "show": true },
+    "footer": { "show": true },
+    "guidedAssistant": { "show": true }
+  },
+  "content": {
+    "hero": {
+      "title": "حوّل عملك مع حزمتنا الرقمية المتكاملة",
+      "subtitle": "من موقع ويب مذهل إلى مساعد ذكي، احصل على كل ما تحتاجه للانتقال إلى العالم الرقمي بسرعة.",
+      "ctaButton": "احصل على الحزمة الآن"
+    },
+    "servicesSection": {
+      "title": "خدماتنا الطبية المتخصصة",
+      "subtitle": "نقدم مجموعة شاملة من الخدمات الطبية لتلبية جميع احتياجاتكم الصحية بأعلى معايير الجودة.",
+      "categories": [
+        {
+          "categoryName": "خدمات طب الأسنان",
+          "services": [
+            {
+              "name": "تنظيف الأسنان وإزالة الجير",
+              "description": "جلسة احترافية لإزالة التكلسات والجير للحصول على ابتسامة صحية ومشرقة.",
+              "imageUrl": "/images/services/teeth-cleaning.jpg",
+              "cta": { "text": "احجز الآن", "href": "/booking?service=teeth-cleaning" }
+            },
+            {
+              "name": "تبييض الأسنان بالليزر",
+              "description": "أحدث تقنيات تبييض الأسنان للحصول على نتائج فورية وبياض ناصع يدوم طويلاً.",
+              "imageUrl": "/images/services/teeth-whitening.jpg",
+              "cta": { "text": "احجز الآن", "href": "/booking?service=teeth-whitening" }
+            }
+          ]
+        },
+        {
+          "categoryName": "خدمات الجلدية والتجميل",
+          "services": [
+            {
+              "name": "جلسة نضارة البشرة (هيدرافيشل)",
+              "description": "علاج متكامل لتنظيف وترطيب البشرة بعمق، مما يمنحها نضارة وحيوية فورية.",
+              "imageUrl": "/images/services/hydrafacial.jpg",
+              "cta": { "text": "احجز الآن", "href": "/booking?service=hydrafacial" }
+            }
+          ]
+        }
+      ]
+    },
+    "doctorsSection": {
+      "title": "تعرف على فريقنا الطبي المتميز",
+      "subtitle": "نفخر بضم نخبة من الأطباء والاستشاريين المتخصصين لتقديم أفضل رعاية صحية لكم.",
+      "doctors": [
+        {
+          "name": "د. محمد عبد العزيز",
+          "specialty": "استشاري طب وجراحة الأسنان",
+          "bio": "متخصص في زراعة الأسنان وتجميل الابتسامة، يؤمن بأن الابتسامة الصحية هي مفتاح الثقة بالنفس.",
+          "imageUrl": "/images/doctors/doctor-male-1.jpg",
+          "experience": "خبرة 12 عامًا",
+          "profileUrl": null,
+          "bookingCta": { "text": "احجز مع د. محمد", "href": "/booking?doctor=mohamed-abdulaziz" }
+        },
+        {
+          "name": "د. سارة العمري",
+          "specialty": "استشارية الأمراض الجلدية والتجميل",
+          "bio": "خبيرة في علاجات الليزر ونضارة البشرة، تسعى دائمًا لتقديم أحدث التقنيات بأمان وفعالية.",
+          "imageUrl": "/images/doctors/doctor-female-1.jpg",
+          "experience": "خبرة 10 سنوات",
+          "profileUrl": null,
+          "bookingCta": { "text": "احجز مع د. سارة", "href": "/booking?doctor=sara-alamri" }
+        }
+      ]
+    },
+    "faqSection": {
+      "title": "أسئلة شائعة",
+      "subtitle": "كل ما تحتاج معرفته في مكان واحد. إذا لم تجد إجابتك، لا تتردد في التواصل معنا.",
+      "contactCta": {
+        "text": "تواصل معنا الآن",
+        "href": "#contact"
+      },
+      "faqs": [
+        {
+          "question": "ما هي أوقات عمل المركز؟",
+          "answer": "نعمل طوال أيام الأسبوع من الساعة 9 صباحًا حتى الساعة 10 مساءً، ما عدا يوم الجمعة من الساعة 2 ظهرًا حتى 10 مساءً."
+        },
+        {
+          "question": "هل تقبلون جميع أنواع التأمين الطبي؟",
+          "answer": "نحن نقبل معظم شركات التأمين الكبرى. للحصول على قائمة كاملة أو للتحقق من تغطية تأمينك، يرجى زيارة صفحة التأمين أو التواصل مع مكتب الاستقبال."
+        },
+        {
+          "question": "كيف يمكنني حجز موعد؟",
+          "answer": "يمكنك حجز موعد بسهولة عبر تطبيقنا، أو بالاتصال المباشر على رقمنا، أو من خلال قسم الحجوزات في هذا الموقع."
+        }
+      ]
+    },
+    "qrCode": {
+      "title": "ثبّت تطبيقنا الويب التقدمي",
+      "description": "امسح الكود برمز الاستجابة السريعة من خلال كاميرا هاتفك لتثبيت تطبيقنا الخفيف. احصل على إشعارات فورية، وأدِر الحجوزات، والوصول إلى العروض الحصرية مباشرة من شاشتك الرئيسية. لا حاجة لمتجر التطبيقات."
+    },
+    "contactForm": {
+      "title": "هل لديك سؤال؟",
+      "submitButton": "إرسال الرسالة",
+      "consentText": "أوافق على [سياسة الخصوصية] وأسمح باستخدام بياناتي للتواصل معي بخصوص استفساري.",
+      "fields": {
+        "name": { "show": true, "label": "الاسم", "placeholder": "أدخل اسمك", "required": true },
+        "email": { "show": true, "label": "البريد الإلكتروني", "placeholder": "أدخل بريدك الإلكتروني", "required": false },
+        "phone": { "show": true, "label": "رقم الواتساب", "placeholder": "5xxxxxxxx", "required": false },
+        "message": { "show": true, "label": "رسالتك", "placeholder": "اكتب استفسارك هنا...", "required": true },
+        "service": { "show": true, "label": "الخدمة المطلوبة", "options": ["استشارة", "تصميم", "برمجة"] },
+        "appointment": { "show": true, "label": "حدد موعداً", "required": false }
+      }
+    },
+    "offersSection": {
+      "title": "عروض حصرية لك",
+      "subtitle": "استفد من أحدث العروض والخصومات المتاحة لفترة محدودة.",
+      "offers": [
+        {
+          "id": "offer-001",
+          "title": "عرض تبييض الأسنان بالليزر",
+          "description": "احصل على ابتسامة هوليوود مع جلستنا لتبييض الأسنان بالليزر.",
+          "newPrice": "499 ر.س",
+          "oldPrice": "750 ر.س",
+          "validUntil": "2025-12-31",
+          "ctaText": "احصل على العرض",
+          "isFeatured": true,
+          "complianceText": "تطبق الشروط والأحكام."
+        },
+        {
+          "id": "offer-002",
+          "title": "باقة العناية بالبشرة",
+          "description": "جلستا تنظيف بشرة عميق مع قناع الذهب.",
+          "newPrice": "350 ر.س",
+          "oldPrice": "500 ر.س",
+          "validUntil": "2025-12-20",
+          "ctaText": "احصل على العرض",
+          "isFeatured": false,
+          "complianceText": "العرض سارٍ حتى نفاد الكمية."
+        }
+      ]
+    },
+    "profileSection": {
+      "title": "ملفي الشخصي",
+      "editButtonText": "تعديل المعلومات",
+      "saveButtonText": "حفظ التغييرات",
+      "cancelButtonText": "إلغاء",
+      "userData": {
+        "name": "عبد الله الراجحي",
+        "phone": "501234567",
+        "email": "a.alrajhi@example.com"
+      },
+      "compliance": {
+        "privacyNotice": {
+          "text": "تُستخدم هذه المعلومات لإدارة حجوزاتك. لمعرفة المزيد، اقرأ",
+          "linkText": "سياسة الخصوصية.",
+          "href": "/privacy"
+        },
+        "reportIssue": {
+          "text": "هل تواجه مشكلة أو تريد الإبلاغ عن انتهاك؟",
+          "linkText": "تواصل مع فريق الدعم.",
+          "href": "/support"
+        },
+        "deleteAccount": {
+          "text": "لحذف حسابك وجميع بياناتك بشكل نهائي،",
+          "linkText": "اطلب الحذف من هنا.",
+          "href": "/account-deletion-request"
+        }
+      }
+    }
+  },
+  "guidedAssistant": {
+    "chatTitle": "المساعد الموجه",
+    "buttonLabel": "افتح المساعد الموجه",
+    "logoUrl": "https://raw.githubusercontent.com/Tameem-Al-Zahrani/Images/main/1-removebg-preview.png",
+    "root": {
+      "message": "أهلاً بك! كيف يمكنني مساعدتك اليوم؟",
+      "options": [
+        { "text": "ما هي خدماتكم؟", "nextId": "servicesNode" },
+        { "text": "ما هي الأسعار؟", "nextId": "pricingNode" }
+      ]
+    },
+    "servicesNode": {
+      "message": "نقدم باقة متكاملة تشمل صفحة هبوط، مساعد موجه، وتطبيق ويب (PWA  ).",
+      "options": [
+        { "text": "أخبرني عن الأسعار", "nextId": "pricingNode" },
+        { "text": "العودة للبداية", "nextId": "root" }
+      ]
+    },
+    "pricingNode": {
+      "message": "تبدأ باقتنا من 99 ر.س شهرياً.",
+      "options": [
+        { "text": "العودة للبداية", "nextId": "root" }
+      ]
+    }
+  }
+}
