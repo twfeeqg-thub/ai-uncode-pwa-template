@@ -1,15 +1,15 @@
 {
   "site": {
-    "name": "أيكود",
-    "contactButton": "تواصل معنا",
-    "copyright": "© 2025 أيكود. جميع الحقوق محفوظة.",
+    "name": "AIUNCODE",
+    "contactButton": "ابدأ الآن",
+    "copyright": "© 2026 AIUNCODE. جميع الحقوق محفوظة.",
     "privacyPolicyLink": "/privacy",
     "termsOfServiceLink": "/terms"
   },
   "pwa": {
-    "appName": "تطبيق أيكود",
-    "appShortName": "أيكود",
-    "appDescription": "تطبيقنا الرسمي للحصول على آخر العروض والإشعارات.",
+    "appName": "AIUNCODE Platform",
+    "appShortName": "AIUNCODE",
+    "appDescription": "منصتك المتكاملة للحلول الرقمية والذكاء الاصطناعي.",
     "themeColor": "#0A0A0A",
     "backgroundColor": "#FFFFFF"
   },
@@ -26,186 +26,123 @@
   },
   "content": {
     "hero": {
-      "title": "حوّل عملك مع حزمتنا الرقمية المتكاملة",
-      "subtitle": "من موقع ويب مذهل إلى مساعد ذكي، احصل على كل ما تحتاجه للانتقال إلى العالم الرقمي بسرعة.",
-      "ctaButton": "احصل على الحزمة الآن"
+      "title": "مستقبل أعمالك يبدأ مع AIUNCODE",
+      "subtitle": "نحول أفكارك إلى واقع رقمي باستخدام المحركات الذكية، صفحات الهبوط فائقة السرعة، وتطبيقات PWA المتطورة.",
+      "ctaButton": "استكشف الحلول الذكية"
     },
     "servicesSection": {
-      "title": "خدماتنا الطبية المتخصصة",
-      "subtitle": "نقدم مجموعة شاملة من الخدمات الطبية لتلبية جميع احتياجاتكم الصحية بأعلى معايير الجودة.",
+      "title": "حلولنا الرقمية المتكاملة",
+      "subtitle": "نقدم تقنيات متطورة تهدف لزيادة أرباحك وأتمتة أعمالك بأعلى معايير الجودة العالمية.",
       "categories": [
         {
-          "categoryName": "خدمات طب الأسنان",
+          "categoryName": "المحركات الذكية",
           "services": [
             {
-              "name": "تنظيف الأسنان وإزالة الجير",
-              "description": "جلسة احترافية لإزالة التكلسات والجير للحصول على ابتسامة صحية ومشرقة.",
-              "imageUrl": "/images/services/teeth-cleaning.jpg",
-              "cta": { "text": "احجز الآن", "href": "/booking?service=teeth-cleaning" }
+              "name": "تطوير PWA الاحترافي",
+              "description": "تطبيقات ويب تعمل بدون إنترنت، سريعة، وتثبت مباشرة على الهواتف دون حاجة للمتاجر.",
+              "imageUrl": "/images/services/pwa-development.jpg",
+              "cta": { "text": "اطلب خدمتك", "href": "#contact" }
             },
             {
-              "name": "تبييض الأسنان بالليزر",
-              "description": "أحدث تقنيات تبييض الأسنان للحصول على نتائج فورية وبياض ناصع يدوم طويلاً.",
-              "imageUrl": "/images/services/teeth-whitening.jpg",
-              "cta": { "text": "احجز الآن", "href": "/booking?service=teeth-whitening" }
-            }
-          ]
-        },
-        {
-          "categoryName": "خدمات الجلدية والتجميل",
-          "services": [
-            {
-              "name": "جلسة نضارة البشرة (هيدرافيشل)",
-              "description": "علاج متكامل لتنظيف وترطيب البشرة بعمق، مما يمنحها نضارة وحيوية فورية.",
-              "imageUrl": "/images/services/hydrafacial.jpg",
-              "cta": { "text": "احجز الآن", "href": "/booking?service=hydrafacial" }
+              "name": "المساعد الموجه الذكي",
+              "description": "نظام محادثة ذكي يوجه عملاءك ويغلق المبيعات آلياً على مدار الساعة.",
+              "imageUrl": "/images/services/smart-assistant.jpg",
+              "cta": { "text": "تجربة الديمو", "href": "#contact" }
             }
           ]
         }
       ]
     },
     "doctorsSection": {
-      "title": "تعرف على فريقنا الطبي المتميز",
-      "subtitle": "نفخر بضم نخبة من الأطباء والاستشاريين المتخصصين لتقديم أفضل رعاية صحية لكم.",
+      "title": "خبراء AIUNCODE",
+      "subtitle": "فريق تقني متخصص في هندسة النظم والذكاء الاصطناعي لضمان نجاح مشروعك.",
       "doctors": [
         {
-          "name": "د. محمد عبد العزيز",
-          "specialty": "استشاري طب وجراحة الأسنان",
-          "bio": "متخصص في زراعة الأسنان وتجميل الابتسامة، يؤمن بأن الابتسامة الصحية هي مفتاح الثقة بالنفس.",
+          "name": "م. تميم الزهراني",
+          "specialty": "كبير المهندسين التقنيين",
+          "bio": "خبير في بناء المعماريات السحابية وحلول الأتمتة الذكية.",
           "imageUrl": "/images/doctors/doctor-male-1.jpg",
-          "experience": "خبرة 12 عامًا",
+          "experience": "خبرة في التحول الرقمي",
           "profileUrl": null,
-          "bookingCta": { "text": "احجز مع د. محمد", "href": "/booking?doctor=mohamed-abdulaziz" }
-        },
-        {
-          "name": "د. سارة العمري",
-          "specialty": "استشارية الأمراض الجلدية والتجميل",
-          "bio": "خبيرة في علاجات الليزر ونضارة البشرة، تسعى دائمًا لتقديم أحدث التقنيات بأمان وفعالية.",
-          "imageUrl": "/images/doctors/doctor-female-1.jpg",
-          "experience": "خبرة 10 سنوات",
-          "profileUrl": null,
-          "bookingCta": { "text": "احجز مع د. سارة", "href": "/booking?doctor=sara-alamri" }
+          "bookingCta": { "text": "تواصل مع المهندس", "href": "#contact" }
         }
       ]
     },
     "faqSection": {
-      "title": "أسئلة شائعة",
-      "subtitle": "كل ما تحتاج معرفته في مكان واحد. إذا لم تجد إجابتك، لا تتردد في التواصل معنا.",
+      "title": "الأسئلة الشائعة",
+      "subtitle": "كل ما تود معرفته عن منصة AIUNCODE وكيفية البدء معنا.",
       "contactCta": {
-        "text": "تواصل معنا الآن",
+        "text": "هل لديك سؤال آخر؟",
         "href": "#contact"
       },
       "faqs": [
         {
-          "question": "ما هي أوقات عمل المركز؟",
-          "answer": "نعمل طوال أيام الأسبوع من الساعة 9 صباحًا حتى الساعة 10 مساءً، ما عدا يوم الجمعة من الساعة 2 ظهرًا حتى 10 مساءً."
+          "question": "ما الذي يميز AIUNCODE عن المواقع التقليدية؟",
+          "answer": "نحن لا نبني مجرد مواقع، بل نبني محركات ذكية (Smart Engines) تدار بملفات JSON وتعتمد على خوادم سحابية فائقة السرعة لضمان أفضل أداء وتجربة مستخدم."
         },
         {
-          "question": "هل تقبلون جميع أنواع التأمين الطبي؟",
-          "answer": "نحن نقبل معظم شركات التأمين الكبرى. للحصول على قائمة كاملة أو للتحقق من تغطية تأمينك، يرجى زيارة صفحة التأمين أو التواصل مع مكتب الاستقبال."
-        },
-        {
-          "question": "كيف يمكنني حجز موعد؟",
-          "answer": "يمكنك حجز موعد بسهولة عبر تطبيقنا، أو بالاتصال المباشر على رقمنا، أو من خلال قسم الحجوزات في هذا الموقع."
+          "question": "هل يمكن ربط المنصة بقواعد بيانات خارجية؟",
+          "answer": "نعم، المنصة مصممة للربط السلس مع Cloud SQL و Supabase و n8n لأتمتة كافة العمليات."
         }
       ]
     },
     "qrCode": {
-      "title": "ثبّت تطبيقنا الويب التقدمي",
-      "description": "امسح الكود برمز الاستجابة السريعة من خلال كاميرا هاتفك لتثبيت تطبيقنا الخفيف. احصل على إشعارات فورية، وأدِر الحجوزات، والوصول إلى العروض الحصرية مباشرة من شاشتك الرئيسية. لا حاجة لمتجر التطبيقات."
+      "title": "احمل منصتك في جيبك",
+      "description": "امسح الكود لتثبيت تطبيق AIUNCODE مباشرة على هاتفك. سرعة البرق، وصول فوري، وبدون تحميل من متجر التطبيقات."
     },
     "contactForm": {
-      "title": "هل لديك سؤال؟",
-      "submitButton": "إرسال الرسالة",
-      "consentText": "أوافق على [سياسة الخصوصية] وأسمح باستخدام بياناتي للتواصل معي بخصوص استفساري.",
+      "title": "لنبدأ رحلة النجاح",
+      "submitButton": "إرسال الطلب",
+      "consentText": "أوافق على معالجة بياناتي للتواصل معي بخصوص استفساري التقني.",
       "fields": {
-        "name": { "show": true, "label": "الاسم", "placeholder": "أدخل اسمك", "required": true },
-        "email": { "show": true, "label": "البريد الإلكتروني", "placeholder": "أدخل بريدك الإلكتروني", "required": false },
-        "phone": { "show": true, "label": "رقم الواتساب", "placeholder": "5xxxxxxxx", "required": false },
-        "message": { "show": true, "label": "رسالتك", "placeholder": "اكتب استفسارك هنا...", "required": true },
-        "service": { "show": true, "label": "الخدمة المطلوبة", "options": ["استشارة", "تصميم", "برمجة"] },
-        "appointment": { "show": true, "label": "حدد موعداً", "required": false }
+        "name": { "show": true, "label": "الاسم", "placeholder": "أدخل اسمك الكريم", "required": true },
+        "email": { "show": true, "label": "البريد الإلكتروني", "placeholder": "example@domain.com", "required": true },
+        "phone": { "show": true, "label": "رقم الواتساب", "placeholder": "5xxxxxxxx", "required": true },
+        "message": { "show": true, "label": "تفاصيل المشروع", "placeholder": "اشرح لنا رؤيتك باختصار...", "required": true },
+        "service": { "show": true, "label": "نوع الخدمة", "options": ["بناء محرك ذكي", "تطبيق PWA", "أتمتة n8n"] },
+        "appointment": { "show": false, "label": "موعد الاستشارة", "required": false }
       }
     },
     "offersSection": {
-      "title": "عروض حصرية لك",
-      "subtitle": "استفد من أحدث العروض والخصومات المتاحة لفترة محدودة.",
+      "title": "عروض الانطلاق",
+      "subtitle": "باقات حصرية لفترة محدودة لمساعدة الشركات الناشئة على التحول الرقمي.",
       "offers": [
         {
-          "id": "offer-001",
-          "title": "عرض تبييض الأسنان بالليزر",
-          "description": "احصل على ابتسامة هوليوود مع جلستنا لتبييض الأسنان بالليزر.",
-          "newPrice": "499 ر.س",
-          "oldPrice": "750 ر.س",
-          "validUntil": "2025-12-31",
-          "ctaText": "احصل على العرض",
+          "id": "offer-pwa",
+          "title": "باقة المحرك الذكي المتكاملة",
+          "description": "صفحة هبوط + PWA + ربط مع Supabase.",
+          "newPrice": "999 ر.س",
+          "oldPrice": "2500 ر.س",
+          "validUntil": "2026-02-01",
+          "ctaText": "احجز الباقة",
           "isFeatured": true,
-          "complianceText": "تطبق الشروط والأحكام."
-        },
-        {
-          "id": "offer-002",
-          "title": "باقة العناية بالبشرة",
-          "description": "جلستا تنظيف بشرة عميق مع قناع الذهب.",
-          "newPrice": "350 ر.س",
-          "oldPrice": "500 ر.س",
-          "validUntil": "2025-12-20",
-          "ctaText": "احصل على العرض",
-          "isFeatured": false,
-          "complianceText": "العرض سارٍ حتى نفاد الكمية."
+          "complianceText": "العرض سارٍ لأول 10 عملاء فقط."
         }
       ]
-    },
-    "profileSection": {
-      "title": "ملفي الشخصي",
-      "editButtonText": "تعديل المعلومات",
-      "saveButtonText": "حفظ التغييرات",
-      "cancelButtonText": "إلغاء",
-      "userData": {
-        "name": "عبد الله الراجحي",
-        "phone": "501234567",
-        "email": "a.alrajhi@example.com"
-      },
-      "compliance": {
-        "privacyNotice": {
-          "text": "تُستخدم هذه المعلومات لإدارة حجوزاتك. لمعرفة المزيد، اقرأ",
-          "linkText": "سياسة الخصوصية.",
-          "href": "/privacy"
-        },
-        "reportIssue": {
-          "text": "هل تواجه مشكلة أو تريد الإبلاغ عن انتهاك؟",
-          "linkText": "تواصل مع فريق الدعم.",
-          "href": "/support"
-        },
-        "deleteAccount": {
-          "text": "لحذف حسابك وجميع بياناتك بشكل نهائي،",
-          "linkText": "اطلب الحذف من هنا.",
-          "href": "/account-deletion-request"
-        }
-      }
     }
   },
   "guidedAssistant": {
-    "chatTitle": "المساعد الموجه",
-    "buttonLabel": "افتح المساعد الموجه",
+    "chatTitle": "مساعد AIUNCODE",
+    "buttonLabel": "تحدث مع المساعد الذكي",
     "logoUrl": "https://raw.githubusercontent.com/Tameem-Al-Zahrani/Images/main/1-removebg-preview.png",
     "root": {
-      "message": "أهلاً بك! كيف يمكنني مساعدتك اليوم؟",
+      "message": "أهلاً بك في AIUNCODE! أنا مساعدك الذكي، كيف يمكنني تسريع نمو أعمالك اليوم؟",
       "options": [
-        { "text": "ما هي خدماتكم؟", "nextId": "servicesNode" },
-        { "text": "ما هي الأسعار؟", "nextId": "pricingNode" }
+        { "text": "أريد بناء منصة ذكية", "nextId": "servicesNode" },
+        { "text": "استفسار عن التكلفة", "nextId": "pricingNode" }
       ]
     },
     "servicesNode": {
-      "message": "نقدم باقة متكاملة تشمل صفحة هبوط، مساعد موجه، وتطبيق ويب (PWA  ).",
+      "message": "ممتاز! نقدم لك صفحات هبوط PWA، أنظمة أتمتة، ومساعدين أذكياء مدمجين.",
       "options": [
-        { "text": "أخبرني عن الأسعار", "nextId": "pricingNode" },
-        { "text": "العودة للبداية", "nextId": "root" }
+        { "text": "ما هي التكلفة؟", "nextId": "pricingNode" },
+        { "text": "العودة للرئيسية", "nextId": "root" }
       ]
     },
     "pricingNode": {
-      "message": "تبدأ باقتنا من 99 ر.س شهرياً.",
+      "message": "تبدأ حلولنا الاقتصادية من 99 ر.س شهرياً للاستضافة المدارة.",
       "options": [
-        { "text": "العودة للبداية", "nextId": "root" }
+        { "text": "ابدأ الآن", "nextId": "root" }
       ]
     }
   }
