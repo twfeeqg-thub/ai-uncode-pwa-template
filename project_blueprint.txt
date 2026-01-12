@@ -1,0 +1,254 @@
+=== PROJECT STRUCTURE ===
+.
+./tailwind.config.js
+./package.json
+./postcss.config.mjs
+./next.config.mjs
+./project_structure.txt
+./generate_project_card.sh
+./config.json
+./postcss.config.js
+./phone-input.css
+./components
+./components/sectors
+./components/sectors/Clinics
+./components/common
+./components/common/FaqSection.tsx
+./components/common/QrCodeSection.tsx
+./components/common/ContactSection.tsx
+./components/common/InstallPromptHandler.tsx
+./components/common/keep.
+./components/common/HeroSection.tsx
+./components/common/Footer.tsx
+./components/common/Header.tsx
+./components/ui
+./components/ui/card.tsx
+./components/ui/textarea.tsx
+./components/ui/badge.tsx
+./components/ui/checkbox.tsx
+./components/ui/label.tsx
+./components/ui/select.tsx
+./components/ui/input.tsx
+./components/ui/button.tsx
+./components/ui/SmartAmbassadorGuided.tsx
+./create_template_profile.sh
+./package-lock.json
+./public
+./public/globe.svg
+./public/next.svg
+./public/window.svg
+./public/images
+./public/images/doctors
+./public/images/services
+./public/vercel.svg
+./public/file.svg
+./tsconfig.json
+./app
+./app/layout.tsx
+./app/favicon.ico
+./app/page.tsx
+./app/manifest.ts
+./app/globals.css
+./app/components
+./app/components/placeholder.txt
+./app/home
+./app/home/page.tsx
+./app/providers.tsx
+./README.md
+./next-env.d.ts
+./PROJECT_CARD.generated.txt
+./project_blueprint.txt
+./project_analysis_for_gemini.txt
+./eslint.config.mjs
+./components.json
+./lib
+./lib/supabaseClient.ts
+./lib/utils.ts
+./template_profile.txt
+
+=== CONFIG.JSON CONTENT ===
+{
+  "site": {
+    "name": "AIUNCODE",
+    "contactButton": "ابدأ الآن",
+    "copyright": "© 2026 AIUNCODE. جميع الحقوق محفوظة.",
+    "privacyPolicyLink": "/privacy",
+    "termsOfServiceLink": "/terms"
+  },
+  "pwa": {
+    "appName": "AIUNCODE Platform",
+    "appShortName": "AIUNCODE",
+    "appDescription": "منصتك المتكاملة للحلول الرقمية والذكاء الاصطناعي.",
+    "themeColor": "#0A0A0A",
+    "backgroundColor": "#FFFFFF"
+  },
+  "sections": {
+    "header": { "show": true },
+    "hero": { "show": true },
+    "services": { "show": true },
+    "doctors": { "show": true },
+    "faq": { "show": true },
+    "qrCode": { "show": true },
+    "contact": { "show": true },
+    "footer": { "show": true },
+    "guidedAssistant": { "show": true }
+  },
+  "content": {
+    "hero": {
+      "title": "مستقبل أعمالك يبدأ مع AIUNCODE",
+      "subtitle": "نحول أفكارك إلى واقع رقمي باستخدام المحركات الذكية، صفحات الهبوط فائقة السرعة، وتطبيقات PWA المتطورة.",
+      "ctaButton": "استكشف الحلول الذكية"
+    },
+    "servicesSection": {
+      "title": "حلولنا الرقمية المتكاملة",
+      "subtitle": "نقدم تقنيات متطورة تهدف لزيادة أرباحك وأتمتة أعمالك بأعلى معايير الجودة العالمية.",
+      "categories": [
+        {
+          "categoryName": "المحركات الذكية",
+          "services": [
+            {
+              "name": "تطوير PWA الاحترافي",
+              "description": "تطبيقات ويب تعمل بدون إنترنت، سريعة، وتثبت مباشرة على الهواتف دون حاجة للمتاجر.",
+              "imageUrl": "/images/services/pwa-development.jpg",
+              "cta": { "text": "اطلب خدمتك", "href": "#contact" }
+            },
+            {
+              "name": "المساعد الموجه الذكي",
+              "description": "نظام محادثة ذكي يوجه عملاءك ويغلق المبيعات آلياً على مدار الساعة.",
+              "imageUrl": "/images/services/smart-assistant.jpg",
+              "cta": { "text": "تجربة الديمو", "href": "#contact" }
+            }
+          ]
+        }
+      ]
+    },
+    "doctorsSection": {
+      "title": "خبراء AIUNCODE",
+      "subtitle": "فريق تقني متخصص في هندسة النظم والذكاء الاصطناعي لضمان نجاح مشروعك.",
+      "doctors": [
+        {
+          "name": "م. تميم الزهراني",
+          "specialty": "كبير المهندسين التقنيين",
+          "bio": "خبير في بناء المعماريات السحابية وحلول الأتمتة الذكية.",
+          "imageUrl": "/images/doctors/doctor-male-1.jpg",
+          "experience": "خبرة في التحول الرقمي",
+          "profileUrl": null,
+          "bookingCta": { "text": "تواصل مع المهندس", "href": "#contact" }
+        }
+      ]
+    },
+    "faqSection": {
+      "title": "الأسئلة الشائعة",
+      "subtitle": "كل ما تود معرفته عن منصة AIUNCODE وكيفية البدء معنا.",
+      "contactCta": {
+        "text": "هل لديك سؤال آخر؟",
+        "href": "#contact"
+      },
+      "faqs": [
+        {
+          "question": "ما الذي يميز AIUNCODE عن المواقع التقليدية؟",
+          "answer": "نحن لا نبني مجرد مواقع، بل نبني محركات ذكية (Smart Engines) تدار بملفات JSON وتعتمد على خوادم سحابية فائقة السرعة لضمان أفضل أداء وتجربة مستخدم."
+        },
+        {
+          "question": "هل يمكن ربط المنصة بقواعد بيانات خارجية؟",
+          "answer": "نعم، المنصة مصممة للربط السلس مع Cloud SQL و Supabase و n8n لأتمتة كافة العمليات."
+        }
+      ]
+    },
+    "qrCode": {
+      "title": "احمل منصتك في جيبك",
+      "description": "امسح الكود لتثبيت تطبيق AIUNCODE مباشرة على هاتفك. سرعة البرق، وصول فوري، وبدون تحميل من متجر التطبيقات."
+    },
+    "contactForm": {
+      "title": "لنبدأ رحلة النجاح",
+      "submitButton": "إرسال الطلب",
+      "consentText": "أوافق على معالجة بياناتي للتواصل معي بخصوص استفساري التقني.",
+      "fields": {
+        "name": { "show": true, "label": "الاسم", "placeholder": "أدخل اسمك الكريم", "required": true },
+        "email": { "show": true, "label": "البريد الإلكتروني", "placeholder": "example@domain.com", "required": true },
+        "phone": { "show": true, "label": "رقم الواتساب", "placeholder": "5xxxxxxxx", "required": true },
+        "message": { "show": true, "label": "تفاصيل المشروع", "placeholder": "اشرح لنا رؤيتك باختصار...", "required": true },
+        "service": { "show": true, "label": "نوع الخدمة", "options": ["بناء محرك ذكي", "تطبيق PWA", "أتمتة n8n"] },
+        "appointment": { "show": false, "label": "موعد الاستشارة", "required": false }
+      }
+    },
+    "offersSection": {
+      "title": "عروض الانطلاق",
+      "subtitle": "باقات حصرية لفترة محدودة لمساعدة الشركات الناشئة على التحول الرقمي.",
+      "offers": [
+        {
+          "id": "offer-pwa",
+          "title": "باقة المحرك الذكي المتكاملة",
+          "description": "صفحة هبوط + PWA + ربط مع Supabase.",
+          "newPrice": "999 ر.س",
+          "oldPrice": "2500 ر.س",
+          "validUntil": "2026-02-01",
+          "ctaText": "احجز الباقة",
+          "isFeatured": true,
+          "complianceText": "العرض سارٍ لأول 10 عملاء فقط."
+        }
+      ]
+    }
+  },
+  "guidedAssistant": {
+    "chatTitle": "مساعد AIUNCODE",
+    "buttonLabel": "تحدث مع المساعد الذكي",
+    "logoUrl": "https://raw.githubusercontent.com/Tameem-Al-Zahrani/Images/main/1-removebg-preview.png",
+    "root": {
+      "message": "أهلاً بك في AIUNCODE! أنا مساعدك الذكي، كيف يمكنني تسريع نمو أعمالك اليوم؟",
+      "options": [
+        { "text": "أريد بناء منصة ذكية", "nextId": "servicesNode" },
+        { "text": "استفسار عن التكلفة", "nextId": "pricingNode" }
+      ]
+    },
+    "servicesNode": {
+      "message": "ممتاز! نقدم لك صفحات هبوط PWA، أنظمة أتمتة، ومساعدين أذكياء مدمجين.",
+      "options": [
+        { "text": "ما هي التكلفة؟", "nextId": "pricingNode" },
+        { "text": "العودة للرئيسية", "nextId": "root" }
+      ]
+    },
+    "pricingNode": {
+      "message": "تبدأ حلولنا الاقتصادية من 99 ر.س شهرياً للاستضافة المدارة.",
+      "options": [
+        { "text": "ابدأ الآن", "nextId": "root" }
+      ]
+    }
+  }
+}
+=== PACKAGE.JSON DEPENDENCIES ===
+  "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.7",
+    "@radix-ui/react-checkbox": "^1.3.3",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/supabase-js": "^2.43.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "libphonenumber-js": "^1.12.30",
+    "lucide-react": "^0.390.0",
+    "next": "14.2.3",
+    "qrcode.react": "^3.2.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-phone-number-input": "^3.4.14",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+
+=== SUPABASE CLIENT LOGIC ===
+import { createClient } from '@supabase/supabase-js'
+
+// قراءة المتغيرات من بيئة العمل (Vercel)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+// التحقق من وجود المتغيرات لضمان عدم حدوث أخطاء
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Supabase URL and Anon Key are not defined in environment variables.");
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
