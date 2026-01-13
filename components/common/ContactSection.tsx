@@ -50,7 +50,7 @@ const ContactSection = ({ data }: { data: any }) => {
     setIsLoading(true);
     setFormStatus('idle');
 
-    // التعديل الذكي: مطابقة البيانات مع أعمدة جدول messages
+    // تجميع البيانات لإرسالها
     const submissionData = {
       name: formData.name,
       email: formData.email,
@@ -59,19 +59,30 @@ const ContactSection = ({ data }: { data: any }) => {
       message: formData.message,
     };
 
-    // إرسال البيانات إلى الجدول الصحيح messages
-    const { error } = await supabase.from('messages').insert([submissionData]);
+    try {
+      // 1. إرسال البيانات إلى سوبابيس (للحفظ الدائم في قاعدة البيانات)
+      const { error: supabaseError } = await supabase.from('messages').insert([submissionData]);
 
-    setIsLoading(false);
+      if (supabaseError) throw supabaseError;
 
-    if (error) {
-      console.error('Supabase error:', error);
-      setFormStatus('error');
-    } else {
+      // 2. إرسال إشعار فوري إلى n8n لتفعيل بوت تليجرام
+      await fetch('https://n8n-main-service.onrender.com/webhook/9fff3089-5e80-40d7-8316-f360122c90d7', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submissionData),
+      });
+
+      // النجاح: تحديث واجهة المستخدم وتصفير الحقول
       setFormStatus('success');
       setFormData({});
       setPhoneValue(undefined);
       setConsent(false);
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      setFormStatus('error');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -121,7 +132,7 @@ const ContactSection = ({ data }: { data: any }) => {
               {data.fields.service.show && ( <div className="space-y-2"> <Label htmlFor="service">{data.fields.service.label}</Label> <Select name="service" onValueChange={(value) => handleSelectChange("service", value)}> <SelectTrigger id="service"><SelectValue placeholder="اختر خدمة" /></SelectTrigger> <SelectContent> {data.fields.service.options.map((option: string) => (<SelectItem key={option} value={option}>{option}</SelectItem>))} </SelectContent> </Select> </div> )}
               
               <div className="flex items-center space-x-2 space-x-reverse">
-                <Checkbox id="consent" onCheckedChange={(checked) => setConsent(checked as boolean)} />
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked as boolean)} />
                 <Label htmlFor="consent" className="text-sm font-normal text-gray-600 leading-relaxed cursor-pointer">
                   {data.consentText.split('[')[0]}
                   <Link href={config.site.privacyPolicyLink} className="text-primary font-medium hover:underline">
